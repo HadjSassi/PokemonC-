@@ -1,8 +1,13 @@
-cmake_minimum_required(VERSION 4.0)
-project(untitled)
+cmake_minimum_required(VERSION 3.28.3)
+project(pokemon)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(untitled main.cpp
-        Pokemon.cpp
-        Pokemon.h)
+add_executable(pokemon main.cpp)
+
+target_link_libraries(pokemon
+        sfml-graphics
+        sfml-window
+        sfml-system
+        sfml-audio
+)
