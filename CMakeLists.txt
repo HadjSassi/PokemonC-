@@ -7,7 +7,9 @@ add_executable(pokemon main.cpp
         core/Pokemon.cpp
         headers/Pokemon.hpp
         core/PokemonVector.cpp
-        headers/PokemonVector.hpp)
+        headers/PokemonVector.hpp
+        core/Pokedex.cpp
+        headers/Pokedex.hpp)
 
 target_link_libraries(pokemon
         sfml-graphics
