@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -std=c++20 -Wall
 LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 TARGET = pokemon
-SRC = main.cpp
+SRC = main.cpp core/Pokemon.cpp
 
 all: $(TARGET)
 
@@ -16,5 +16,6 @@ clean:
 	rm -f $(TARGET)
 
 run:
+	clear
 	make clean
 	make install

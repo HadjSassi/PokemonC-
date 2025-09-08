@@ -3,7 +3,9 @@ project(pokemon)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(pokemon main.cpp)
+add_executable(pokemon main.cpp
+        core/Pokemon.cpp
+        headers/Pokemon.hpp)
 
 target_link_libraries(pokemon
         sfml-graphics
