@@ -18,7 +18,7 @@ private :
 public:
     Pokemon(int id, string name, double hitPoint, double attack, double defense, int generation, int maxLife);
 
-    Pokemon(Pokemon &pokemon);
+    Pokemon(const Pokemon &pokemon);
 
     int getId() const;
 

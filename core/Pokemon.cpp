@@ -9,7 +9,7 @@ Pokemon::Pokemon(int id, string name, double hitPoint, double attack, double def
     pokemonCount++;
 }
 
-Pokemon::Pokemon(Pokemon &pokemon) : id(pokemon.id), name(pokemon.name), hitPoint(pokemon.hitPoint),
+Pokemon::Pokemon(const Pokemon &pokemon) : id(pokemon.id), name(pokemon.name), hitPoint(pokemon.hitPoint),
                                      attack(pokemon.attack), defense(pokemon.defense), generation(pokemon.generation), maxLife(pokemon.maxLife) {
     pokemonCount++;
 }
