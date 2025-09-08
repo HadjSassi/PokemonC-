@@ -1,6 +1,12 @@
 #include <SFML/Graphics.hpp>
 
+#include "headers/Pokemon.hpp"
+
 int main() {
+
+    Pokemon pokemon(1, "monster1", 100, 20, 10, 1);
+    pokemon.displayInfo();
+
     sf::RenderWindow window(sf::VideoMode(800, 600), "Hello SFML");
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
