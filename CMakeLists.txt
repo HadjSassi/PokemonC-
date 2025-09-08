@@ -11,7 +11,9 @@ add_executable(pokemon main.cpp
         core/Pokedex.cpp
         headers/Pokedex.hpp
         core/PokemonParty.cpp
-        headers/PokemonParty.hpp)
+        headers/PokemonParty.hpp
+        core/PokemonAttack.cpp
+        headers/PokemonAttack.hpp)
 
 target_link_libraries(pokemon
         sfml-graphics
