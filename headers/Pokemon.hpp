@@ -13,9 +13,10 @@ private :
     double attack;
     double defense;
     int generation;
+    int maxLife;
 
 public:
-    Pokemon(int id, string name, double hitPoint, double attack, double defense, int generation);
+    Pokemon(int id, string name, double hitPoint, double attack, double defense, int generation, int maxLife);
 
     Pokemon(Pokemon &pokemon);
 
@@ -30,6 +31,8 @@ public:
     double getDefense() const;
 
     int getGeneration() const;
+
+    int getMaxLife() const;
 
     void strike(Pokemon &target) const;
 

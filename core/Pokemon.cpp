@@ -4,13 +4,13 @@
 
 int Pokemon::pokemonCount = 0;
 
-Pokemon::Pokemon(int id, string name, double hitPoint, double attack, double defense, int generation) : id(id),
-    name(name), hitPoint(hitPoint), attack(attack), defense(defense), generation(generation) {
+Pokemon::Pokemon(int id, string name, double hitPoint, double attack, double defense, int generation, int maxLife) : id(id),
+    name(name), hitPoint(hitPoint), attack(attack), defense(defense), generation(generation), maxLife(maxLife) {
     pokemonCount++;
 }
 
 Pokemon::Pokemon(Pokemon &pokemon) : id(pokemon.id), name(pokemon.name), hitPoint(pokemon.hitPoint),
-                                     attack(pokemon.attack), defense(pokemon.defense), generation(pokemon.generation) {
+                                     attack(pokemon.attack), defense(pokemon.defense), generation(pokemon.generation), maxLife(pokemon.maxLife) {
     pokemonCount++;
 }
 
@@ -40,6 +40,10 @@ double Pokemon::getDefense() const {
 
 int Pokemon::getGeneration() const {
     return generation;
+}
+
+int Pokemon::getMaxLife() const {
+    return maxLife;
 }
 
 void Pokemon::strike(Pokemon &target) const {
