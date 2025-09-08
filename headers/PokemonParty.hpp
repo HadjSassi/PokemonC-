@@ -10,4 +10,5 @@ public:
     void addPokemonToParty(const Pokemon& pokemon);
     Pokemon* extractPokemonFromPartyByIndex(int index);
     Pokemon* extractPokemonFromPartyByName(string name);
+    void displayAllPokemons() override;
 };

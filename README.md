@@ -52,3 +52,27 @@ Defense: 10
 Generation: 1
 make[1]: on quitte le répertoire «/home/mahdihadjsassi/ENSEA/C++/projects»
 ```
+
+### Pokemon class
+
+Juste on a rajouté l'attribut `maxLife` avec sont getter, par rapport ce qui est fait dans le cours.
+
+### PokemonVector class
+
+J'ai rendu la classe protégé, avec le getter de vector est en constante, du coup on ne peut pas modifier son contenu.
+
+### Pokedex class
+Class en singleton, pour accéder à la base de donnée des pokemons. 
+Il manque le mutex pour, faire the thread safe.
+
+### PokemonParty class
+
+Ici, il y'a un grand probléme de bonne pratique, il y'a deux méthodes exactes dans PokemonParty et Pokedex.
+Il faut penser à une facon de factoriser le code, ou de trouver une différence entre les deux programmes.
+
+### PokemonAttack class
+
+Ici, on utilisé les paramétre par défaut dans la creatoin de packet pour jouer, on peut modifier le nombre de pokemon à integrer
+et le random seed pour être aleatoire.
+
+## 1.3 Une interface graphique

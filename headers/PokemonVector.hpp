@@ -1,6 +1,7 @@
 #include <vector>
 #include "Pokemon.hpp"
 #include <fstream>
+#include <iostream>
 
 
 using namespace std;
@@ -20,5 +21,5 @@ protected:
 public:
     Pokemon* getPokemonByIndex(int index) ;
     Pokemon* getPokemonByName(string name);
-    void displayAllPokemons() ;
+    virtual void displayAllPokemons() ;
 };

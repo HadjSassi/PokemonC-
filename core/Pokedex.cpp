@@ -25,3 +25,11 @@ Pokedex::Pokedex() {
         }
     }
 }
+
+void PokemonVector::displayAllPokemons()  {
+    cout<<"All Pokemons in the Pokedex:"<<endl;
+    for (Pokemon &pokemon : pokemons) {
+        pokemon.displayInfo();
+    }
+    cout<<"-----------------------"<<endl;
+}

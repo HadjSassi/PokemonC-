@@ -27,3 +27,11 @@ Pokemon* PokemonParty::extractPokemonFromPartyByName(string name) {
     }
     return nullptr;
 }
+
+void PokemonVector::displayAllPokemons()  {
+    cout << "All Pokemons in the party " << endl;
+    for (Pokemon &pokemon : pokemons) {
+        pokemon.displayInfo();
+    }
+    cout << "-----------------------" << endl;
+}

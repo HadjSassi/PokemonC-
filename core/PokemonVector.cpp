@@ -14,13 +14,6 @@ const vector<Pokemon>& PokemonVector::getPokemons() const {
     return pokemons;
 }
 
-void PokemonVector::displayAllPokemons()  {
-    for (Pokemon &pokemon : pokemons) {
-        pokemon.displayInfo();
-        cout << "------------------------" << endl;
-    }
-}
-
 Pokemon* PokemonVector::getPokemonByIndex(int index) {
     if (index >= 0 && index < getPokemonsCount()) {
         return new Pokemon(getPokemonAt(index));
