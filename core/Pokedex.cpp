@@ -25,19 +25,3 @@ Pokedex::Pokedex() {
         }
     }
 }
-
-Pokemon* Pokedex::getPokemonByIndex(int index) {
-    if (index >= 0 && index < getPokemonsCount()) {
-        return new Pokemon(getPokemonAt(index));
-    }
-    throw out_of_range("Index out of range");
-}
-
-Pokemon* Pokedex::getPokemonByName(string name) {
-    for (const Pokemon &pokemon: getPokemons()) {
-        if (pokemon.getName() == name) {
-            return new Pokemon(pokemon);
-        }
-    }
-    throw invalid_argument("Pokemon not found");
-}

@@ -11,7 +11,5 @@ private:
     Pokedex();
 
 public:
-    Pokemon* getPokemonByIndex(int index);
-    Pokemon* getPokemonByName(string name);
     static Pokedex* getInstance();
 };

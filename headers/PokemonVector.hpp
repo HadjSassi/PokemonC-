@@ -1,5 +1,6 @@
 #include <vector>
 #include "Pokemon.hpp"
+#include <fstream>
 
 
 using namespace std;
@@ -9,24 +10,15 @@ class PokemonVector {
 
 private:
     vector<Pokemon> pokemons;
-    ~PokemonVector();
 
 protected:
-    void addPokemon(const Pokemon& pokemon) {
-        pokemons.push_back(pokemon);
-    }
-    const Pokemon& getPokemonAt(int index) const {
-        return pokemons.at(index);
-    }
-    int getPokemonsCount() const {
-        return pokemons.size();
-    }
-    const vector<Pokemon>& getPokemons() const {
-        return pokemons;
-    }
+    void addPokemon(const Pokemon& pokemon) ;
+    const Pokemon& getPokemonAt(int index) const ;
+    int getPokemonsCount() const ;
+    const vector<Pokemon>& getPokemons() const ;
 
 public:
-    virtual Pokemon* getPokemonByIndex(int index)  = 0;
-    virtual Pokemon* getPokemonByName(string name)  = 0;
+    Pokemon* getPokemonByIndex(int index) ;
+    Pokemon* getPokemonByName(string name);
     void displayAllPokemons() ;
 };

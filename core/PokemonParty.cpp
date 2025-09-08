@@ -1,6 +1,6 @@
 #include "../headers/PokemonParty.hpp"
 
-void PokemonParty::addPokemonToParty(const Pokemon pokemon) {
+void PokemonParty::addPokemonToParty(const Pokemon& pokemon) {
     my_pokemons.push_back(pokemon);
 }
 
