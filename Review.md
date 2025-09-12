@@ -5,7 +5,7 @@ L'organisation des fichiers est très propre et lisible c'est vraiment agréable
 ## Pokemon 
 ligne 54 get damage part :
 si le pokemon est déjà mort pas la peine d'effectuer le reste donc il est mieux de renvoyer false directement
-    ```
+```
     if (hitPoint==0)      
        return false;
 ```
