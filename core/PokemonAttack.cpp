@@ -15,7 +15,7 @@ void PokemonAttack::createSetFromParty(int number_of_pokemons, int random_seed) 
     vector<int> selected_indices;
     while (attack_team.size() < number_of_pokemons) {
         int index = rand() % getPokemonsCount();
-        attack_team.push_back(*extractPokemonFromPartyByIndex(index));
+        attack_team.push_back(extractPokemonFromPartyByIndex(index));
     }
 }
 

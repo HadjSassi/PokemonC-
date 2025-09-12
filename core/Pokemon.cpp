@@ -72,10 +72,10 @@ int Pokemon::getPokemonCount() {
 }
 
 void Pokemon::displayInfo() const {
-    cout << "ID: " << id << endl;
-    cout << "Name: " << name << endl;
-    cout << "Hit Points: " << hitPoint << endl;
-    cout << "Attack: " << attack << endl;
-    cout << "Defense: " << defense << endl;
-    cout << "Generation: " << generation << endl;
+    cout << " ID: " << id ;
+    cout << " Name: " << name ;
+    cout << " Hit Points: " << hitPoint ;
+    cout << " Attack: " << attack ;
+    cout << " Defense: " << defense ;
+    cout << " Generation: " << generation << endl;
 }

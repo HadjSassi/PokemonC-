@@ -21,5 +21,5 @@ protected:
 public:
     Pokemon* getPokemonByIndex(int index) ;
     Pokemon* getPokemonByName(string name);
-    virtual void displayAllPokemons() ;
+    virtual void displayAllPokemons() = 0;
 };

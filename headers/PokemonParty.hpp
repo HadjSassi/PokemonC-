@@ -8,7 +8,7 @@ private:
 public:
     int getPokemonsCount() const;
     void addPokemonToParty(const Pokemon& pokemon);
-    Pokemon* extractPokemonFromPartyByIndex(int index);
-    Pokemon* extractPokemonFromPartyByName(string name);
+    Pokemon extractPokemonFromPartyByIndex(int index);
+    Pokemon extractPokemonFromPartyByName(string name);
     void displayAllPokemons() override;
 };
