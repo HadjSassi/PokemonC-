@@ -20,7 +20,8 @@ void PokemonAttack::createSetFromParty(int number_of_pokemons, int random_seed) 
 }
 
 void PokemonAttack::reintegrateAllToParty() {
-    for (const Pokemon &pokemon : attack_team) {
+    for (Pokemon &pokemon : attack_team) {
+        pokemon.heal(pokemon.getMaxLife());
         addPokemonToParty(pokemon);
     }
     attack_team.clear();
@@ -29,6 +30,7 @@ void PokemonAttack::reintegrateAllToParty() {
 void PokemonAttack::reintegrateDeadToParty() {
     for (Pokemon pokemon : attack_team) {
         if (pokemon.getHitPoint() <= 0) {
+            pokemon.heal(pokemon.getMaxLife());
             addPokemonToParty(pokemon);
         }
     }

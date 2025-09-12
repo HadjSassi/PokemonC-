@@ -58,6 +58,15 @@ bool Pokemon::getDamage(int damage) {
     return hitPoint > 0;
 }
 
+void Pokemon::heal(int amount){
+    if (hitPoint<=0)
+    hitPoint=amount;
+    else
+    hitPoint+=amount;
+    if (hitPoint>maxLife)
+    hitPoint=maxLife;
+}
+
 int Pokemon::getPokemonCount() {
     return pokemonCount;
 }

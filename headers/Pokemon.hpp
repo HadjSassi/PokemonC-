@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 using namespace std;
 
@@ -39,6 +40,8 @@ public:
     bool getDamage(int damage);
 
     static int getPokemonCount();
+
+    void heal(int amount);
 
     ~Pokemon();
 
