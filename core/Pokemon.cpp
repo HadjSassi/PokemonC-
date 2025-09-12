@@ -48,7 +48,7 @@ int Pokemon::getMaxLife() const {
 
 void Pokemon::strike(Pokemon &target) const {
     if (target.getHitPoint() > 0)
-        target.getDamage(this->attack - target.defense);
+        target.getDamage((this->attack - target.defense>0) ? this->attack - target.defense : 0);
 }
 
 bool Pokemon::getDamage(int damage) {

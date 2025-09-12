@@ -26,9 +26,9 @@ Pokedex::Pokedex() {
     }
 }
 
-void PokemonVector::displayAllPokemons()  {
+void Pokedex::displayAllPokemons()  {
     cout<<"All Pokemons in the Pokedex:"<<endl;
-    for (Pokemon &pokemon : pokemons) {
+    for (Pokemon pokemon : getPokemons()) {
         pokemon.displayInfo();
     }
     cout<<"-----------------------"<<endl;
