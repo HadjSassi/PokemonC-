@@ -15,6 +15,55 @@ add_executable(pokemon main.cpp
         core/PokemonAttack.cpp
         headers/PokemonAttack.hpp)
 
+add_executable(pokemonUnitTest cunit/PokemonUnitTest.cpp
+        core/Pokemon.cpp
+        headers/Pokemon.hpp
+        core/PokemonVector.cpp
+        headers/PokemonVector.hpp
+        core/Pokedex.cpp
+        headers/Pokedex.hpp
+        core/PokemonParty.cpp
+        headers/PokemonParty.hpp
+        core/PokemonAttack.cpp
+        headers/PokemonAttack.hpp)
+
+
+add_executable(pokedexUnitTest cunit/PokedexUnitTest.cpp
+        core/Pokemon.cpp
+        headers/Pokemon.hpp
+        core/PokemonVector.cpp
+        headers/PokemonVector.hpp
+        core/Pokedex.cpp
+        headers/Pokedex.hpp
+        core/PokemonParty.cpp
+        headers/PokemonParty.hpp
+        core/PokemonAttack.cpp
+        headers/PokemonAttack.hpp)
+
+add_executable(pokemonPartyUnitTest cunit/PokemonPartyUnitTest.cpp
+        core/Pokemon.cpp
+        headers/Pokemon.hpp
+        core/PokemonVector.cpp
+        headers/PokemonVector.hpp
+        core/Pokedex.cpp
+        headers/Pokedex.hpp
+        core/PokemonParty.cpp
+        headers/PokemonParty.hpp
+        core/PokemonAttack.cpp
+        headers/PokemonAttack.hpp)
+
+add_executable(pokemonAttackUnitTest cunit/PokemonAttackUnitTest.cpp
+        core/Pokemon.cpp
+        headers/Pokemon.hpp
+        core/PokemonVector.cpp
+        headers/PokemonVector.hpp
+        core/Pokedex.cpp
+        headers/Pokedex.hpp
+        core/PokemonParty.cpp
+        headers/PokemonParty.hpp
+        core/PokemonAttack.cpp
+        headers/PokemonAttack.hpp)
+
 target_link_libraries(pokemon
         sfml-graphics
         sfml-window
