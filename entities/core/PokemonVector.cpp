@@ -21,7 +21,7 @@ Pokemon *PokemonVector::getPokemonByIndex(int index) {
     if (index >= 0 && index < getPokemonsCount()) {
         return new Pokemon(getPokemonAt(index));
     }
-    throw out_of_range("Index out of range");
+    throw out_of_range("Index out of range: " + std::to_string(index));
 }
 
 Pokemon *PokemonVector::getPokemonByName(string name) {
@@ -30,5 +30,5 @@ Pokemon *PokemonVector::getPokemonByName(string name) {
             return new Pokemon(pokemon);
         }
     }
-    throw invalid_argument("Pokemon not found");
+    throw invalid_argument("Pokemon not found: "+name);
 }

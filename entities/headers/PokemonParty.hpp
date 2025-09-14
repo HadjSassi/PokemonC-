@@ -2,6 +2,8 @@
 
 class PokemonParty : public PokemonVector {
 public:
+    static PokemonParty *getInstance();
+
     int getPokemonsCount() const;
 
     void addPokemonToParty(const Pokemon &pokemon);
@@ -12,6 +14,12 @@ public:
 
     void displayAllPokemons() override;
 
+    bool hasPokemonWithId(int index);
+
 private:
+    static PokemonParty *instance;
+
+    PokemonParty() = default;
+
     vector<Pokemon> my_pokemons;
 };

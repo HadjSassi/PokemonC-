@@ -1,5 +1,12 @@
 #include "../headers/PokemonParty.hpp"
 
+PokemonParty* PokemonParty::instance = nullptr;
+
+PokemonParty* PokemonParty::getInstance() {
+    if (!instance) instance = new PokemonParty();
+    return instance;
+}
+
 void PokemonParty::addPokemonToParty(const Pokemon &pokemon) {
     my_pokemons.push_back(pokemon);
 }
@@ -34,4 +41,13 @@ void PokemonParty::displayAllPokemons() {
         pokemon.displayInfo();
     }
     cout << "-----------------------" << endl;
+}
+
+bool PokemonParty::hasPokemonWithId(int index) {
+    for (const Pokemon &pokemon: my_pokemons) {
+        if (pokemon.getId() == index) {
+            return true;
+        }
+    }
+    return false;
 }

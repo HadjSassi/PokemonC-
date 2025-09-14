@@ -1,3 +1,5 @@
+#ifndef POKEMONVECTOR_HPP
+#define POKEMONVECTOR_HPP
 #include <vector>
 #include "Pokemon.hpp"
 #include <fstream>
@@ -25,3 +27,4 @@ protected:
 
     const vector<Pokemon> &getPokemons() const;
 };
+#endif // POKEMONVECTOR_HPP

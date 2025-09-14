@@ -1,4 +1,6 @@
 #include "RandomPage.hpp"
+
+#include "../../entities/headers/PokemonParty.hpp"
 #include "../RencontrePage/RencontrePage.hpp"
 #include "../FightPage/FightPage.hpp"
 
@@ -22,8 +24,7 @@ bool RandomPage::isFinished() const {
 }
 
 unique_ptr<BasePage> RandomPage::next() {
-    // if (value_ % 2 == 0) {
-    if (true) {
+    if ( PokemonParty::getInstance()->getPokemonsCount() == 0 || value_ % 2 == 0) {
         return make_unique<class RencontrePage>();
     } else {
         return make_unique<class FightPage>();
