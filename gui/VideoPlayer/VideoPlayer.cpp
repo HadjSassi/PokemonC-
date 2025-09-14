@@ -26,6 +26,10 @@ VideoPlayer::VideoPlayer(const string &path, float fps) {
     if (sprites_.empty()) {
         cerr << "No frames found in: " << path << endl;
         finished_ = true;
+    } else {
+        // Récupère la taille du bureau et redimensionne
+        auto desktop = sf::VideoMode::getDesktopMode();
+        setSize(sf::Vector2f(desktop.width, desktop.height));
     }
 }
 
@@ -49,5 +53,14 @@ bool VideoPlayer::isFinished() const {
 void VideoPlayer::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     if (!sprites_.empty() && !finished_) {
         target.draw(sprites_[currentFrame_], states);
+    }
+}
+
+void VideoPlayer::setSize(const sf::Vector2f& size) {
+    for (size_t i = 0; i < sprites_.size(); ++i) {
+        auto texSize = frames_[i].getSize();
+        float scaleX = size.x / texSize.x;
+        float scaleY = size.y / texSize.y;
+        sprites_[i].setScale(scaleX, scaleY);
     }
 }

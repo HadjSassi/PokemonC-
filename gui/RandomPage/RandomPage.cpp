@@ -9,10 +9,10 @@ RandomPage::RandomPage() : BasePage() {
     value_ = dist(gen);
 
     text_.setString("Exploration ...");
-    text_.setCharacterSize(48);
-    text_.setFillColor(sf::Color::Yellow);
+    text_.setCharacterSize(58);
+    text_.setFillColor(sf::Color::Black);
 
-    video_ = std::make_unique<VideoPlayer>("../resources/vid/exploration", 24.0f);
+    video_ = std::make_unique<VideoPlayer>("../resources/vid/exploration", 15.0f);
 }
 
 
@@ -31,6 +31,7 @@ unique_ptr<BasePage> RandomPage::next() {
 
 void RandomPage::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     if (video_) target.draw(*video_, states);
+    BasePage::draw(target, states);
 }
 
 void RandomPage::update() {

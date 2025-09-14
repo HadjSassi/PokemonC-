@@ -1,11 +1,8 @@
-//
-// Created by mahdihadjsassi on 14/09/2025.
-//
-
 #ifndef POKEMON_VIDEOPLAYER_HPP
 #define POKEMON_VIDEOPLAYER_HPP
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 #include <vector>
 #include <string>
 
@@ -17,6 +14,9 @@ public:
 
     void update();
     bool isFinished() const;
+
+protected:
+    void setSize(const sf::Vector2f &size);
 
 private:
     vector<sf::Texture> frames_;
