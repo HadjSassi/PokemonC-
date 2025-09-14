@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 
-const string chemin = "../database/pokedex.csv";
+const string chemin = "../resources/database/pokedex.csv";
 
 class Pokedex: public PokemonVector {
 private:
