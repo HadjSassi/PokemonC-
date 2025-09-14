@@ -1,7 +1,3 @@
-//
-// Created by mahdihadjsassi on 12/09/2025.
-//
-
 #include "BasePage.hpp"
 
 BasePage::BasePage() {
@@ -10,5 +6,14 @@ BasePage::BasePage() {
 }
 
 void BasePage::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    target.draw(text_, states);
+    sf::Text centered = text_;
+
+    const auto bounds = centered.getLocalBounds();
+    centered.setOrigin(bounds.left + bounds.width / 2.f,
+                       bounds.top  + bounds.height / 2.f);
+
+    const sf::View& view = target.getView();
+    centered.setPosition(view.getCenter());
+
+    target.draw(centered, states);
 }

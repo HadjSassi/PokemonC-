@@ -19,7 +19,15 @@ add_executable(pokemon main.cpp
         gui/HomePage/HomePage.cpp
         gui/HomePage/HomePage.hpp
         gui/WelcomePage/WelcomePage.cpp
-        gui/WelcomePage/WelcomePage.hpp)
+        gui/WelcomePage/WelcomePage.hpp
+        gui/MeetingPage/RencontrePage.cpp
+        gui/MeetingPage/RencontrePage.hpp
+        gui/RandomPage/RandomPage.cpp
+        gui/RandomPage/RandomPage.hpp
+        gui/FightPage/FightPage.cpp
+        gui/FightPage/FightPage.hpp
+        gui/common/CenteredActionPage.cpp
+        gui/common/CenteredActionPage.hpp)
 
 add_executable(pokemonUnitTest cunit/PokemonUnitTest.cpp
         entities/core/Pokemon.cpp
