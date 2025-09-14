@@ -13,7 +13,13 @@ add_executable(pokemon main.cpp
         core/PokemonParty.cpp
         headers/PokemonParty.hpp
         core/PokemonAttack.cpp
-        headers/PokemonAttack.hpp)
+        headers/PokemonAttack.hpp
+        gui/BasePage.cpp
+        gui/BasePage.hpp
+        gui/HomePage/HomePage.cpp
+        gui/HomePage/HomePage.hpp
+        gui/WelcomePage/WelcomePage.cpp
+        gui/WelcomePage/WelcomePage.hpp)
 
 add_executable(pokemonUnitTest cunit/PokemonUnitTest.cpp
         core/Pokemon.cpp

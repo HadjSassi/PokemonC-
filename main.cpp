@@ -1,11 +1,14 @@
+#include "gui/WelcomePage/WelcomePage.hpp"
+#include "gui/HomePage/HomePage.hpp"
 #include <SFML/Graphics.hpp>
-
-#include "headers/Pokemon.hpp"
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Hello SFML");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+
+    WelcomePage welcomePage;
+    HomePage mainPage;
+    bool showWelcome = true;
+
     while (window.isOpen()) {
         sf::Event event{};
         while (window.pollEvent(event)) {
@@ -13,7 +16,18 @@ int main() {
                 window.close();
         }
         window.clear();
-        window.draw(shape);
+
+        if (showWelcome) {
+            welcomePage.update();
+            window.draw(welcomePage);
+            if (welcomePage.isTimeUp()) {
+                showWelcome = false;
+            }
+        } else {
+            mainPage.update();
+            window.draw(mainPage);
+        }
+
         window.display();
     }
     return 0;
