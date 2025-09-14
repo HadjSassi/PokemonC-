@@ -27,7 +27,9 @@ add_executable(pokemon main.cpp
         gui/FightPage/FightPage.cpp
         gui/FightPage/FightPage.hpp
         gui/common/CenteredActionPage.cpp
-        gui/common/CenteredActionPage.hpp)
+        gui/common/CenteredActionPage.hpp
+        gui/VideoPlayer/VideoPlayer.cpp
+        gui/VideoPlayer/VideoPlayer.hpp)
 
 add_executable(pokemonUnitTest cunit/PokemonUnitTest.cpp
         entities/core/Pokemon.cpp
