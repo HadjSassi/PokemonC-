@@ -20,8 +20,8 @@ add_executable(pokemon main.cpp
         gui/HomePage/HomePage.hpp
         gui/WelcomePage/WelcomePage.cpp
         gui/WelcomePage/WelcomePage.hpp
-        gui/MeetingPage/RencontrePage.cpp
-        gui/MeetingPage/RencontrePage.hpp
+        gui/RencontrePage/RencontrePage.cpp
+        gui/RencontrePage/RencontrePage.hpp
         gui/RandomPage/RandomPage.cpp
         gui/RandomPage/RandomPage.hpp
         gui/FightPage/FightPage.cpp

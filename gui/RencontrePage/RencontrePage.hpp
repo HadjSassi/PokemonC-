@@ -1,11 +1,15 @@
-#ifndef POKEMON_FIGHTPAGE_HPP
-#define POKEMON_FIGHTPAGE_HPP
+#ifndef RENCONTREPAGE_HPP
+#define RENCONTREPAGE_HPP
+
+
+#include "../BasePage.hpp"
+
 
 #include "../common/CenteredActionPage.hpp"
 
-class FightPage : public CenteredActionPage {
+class RencontrePage : public CenteredActionPage {
 public:
-    FightPage();
+    RencontrePage();
 
     std::unique_ptr<BasePage> next() override;
 
@@ -13,4 +17,4 @@ protected:
     void onButtonClicked() override { CenteredActionPage::onButtonClicked(); }
 };
 
-#endif //POKEMON_FIGHTPAGE_HPP
+#endif //RENCONTREPAGE_HPP
