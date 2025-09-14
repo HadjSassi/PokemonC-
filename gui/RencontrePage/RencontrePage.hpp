@@ -5,12 +5,14 @@
 #include "../BasePage.hpp"
 #include "../common/CenteredActionPage.hpp"
 #include "../components/Popup.hpp"
+#include "../../entities/headers/Pokemon.hpp"
 #include <random>
+
 
 class RencontrePage : public CenteredActionPage {
 public:
     RencontrePage();
-
+    void selectRandomPokemon();
     unique_ptr<BasePage> next() override;
 
 protected:
@@ -21,6 +23,7 @@ private:
     sf::Texture pokemonTexture;
     sf::Sprite pokemonSprite;
     Popup popup;
+    Pokemon *pokemon;
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 };
 

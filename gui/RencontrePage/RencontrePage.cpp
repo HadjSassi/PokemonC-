@@ -1,24 +1,31 @@
 #include "RencontrePage.hpp"
 #include "../HomePage/HomePage.hpp"
 #include <SFML/Window.hpp>
+#include "../../entities/headers/Pokedex.hpp"
 
 RencontrePage::RencontrePage() : CenteredActionPage(), popup(*text_.getFont()) {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> distrib(1, 898);
-    pokemonId = distrib(gen);
+    selectRandomPokemon();
 
-    std::string path = "../resources/img/pokemons/" + std::to_string(pokemonId) + ".png";
-    if (pokemonTexture.loadFromFile(path)) {
-        pokemonSprite.setTexture(pokemonTexture);
-    }
     text_.setString("Rencontre");
     text_.setCharacterSize(48);
-    text_.setFillColor(sf::Color::Cyan);
+    text_.setFillColor(sf::Color::Yellow);
 
     setButtonSize({220.f, 64.f});
     setButtonColors(sf::Color(30, 144, 255), sf::Color::Black, 2.f);
     setButtonText("Capture", 32, sf::Color::White);
+}
+
+void RencontrePage::selectRandomPokemon() {
+    Pokedex* pokedex = Pokedex::getInstance();
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distrib(1, 898);
+    pokemonId = distrib(gen);
+    pokemon = pokedex->getPokemonByIndex(pokemonId);
+    std::string path = "../resources/img/pokemons/" + std::to_string(pokemonId) + ".png";
+    if (pokemonTexture.loadFromFile(path)) {
+        pokemonSprite.setTexture(pokemonTexture);
+    }
 }
 
 unique_ptr<BasePage> RencontrePage::next() {
@@ -26,7 +33,6 @@ unique_ptr<BasePage> RencontrePage::next() {
 }
 
 void RencontrePage::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    CenteredActionPage::draw(target, states);
 
     sf::Vector2u texSize = pokemonTexture.getSize();
     sf::Vector2u winSize = target.getSize();
@@ -36,7 +42,20 @@ void RencontrePage::draw(sf::RenderTarget& target, sf::RenderStates states) cons
     scaledSprite.setScale(-scale, scale);
     scaledSprite.setPosition(static_cast<float>(texSize.x * scale), 0);
 
+    sf::Text infoText;
+    infoText.setFont(*text_.getFont());
+    if (pokemon) infoText.setString(pokemon->getInfoString());
+    infoText.setCharacterSize(28);
+    infoText.setFillColor(sf::Color::White);
+
+    sf::FloatRect textRect = infoText.getLocalBounds();
+    float x = winSize.x - textRect.width - 60.f;
+    float y = (winSize.y - textRect.height) / 2.f;
+    infoText.setPosition(x, y);
+
+    CenteredActionPage::draw(target, states);
     target.draw(scaledSprite, states);
+    target.draw(infoText, states);
     popup.draw(target);
 }
 

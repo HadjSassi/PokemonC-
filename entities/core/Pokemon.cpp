@@ -2,6 +2,8 @@
 
 #include "../headers/Pokemon.hpp"
 
+#include <sstream>
+
 int Pokemon::pokemonCount = 0;
 
 Pokemon::Pokemon(int id, string name, double hitPoint, double attack, double defense, int generation,
@@ -81,4 +83,15 @@ void Pokemon::displayInfo() const {
     cout << " Attack: " << attack;
     cout << " Defense: " << defense;
     cout << " Generation: " << generation << endl;
+}
+
+std::string Pokemon::getInfoString() const {
+    std::ostringstream oss;
+    oss << "ID: " << id << "\n";
+    oss << "Name: " << name << "\n";
+    oss << "Hit Points: " << hitPoint << "\n";
+    oss << "Attack: " << attack << "\n";
+    oss << "Defense: " << defense << "\n";
+    oss << "Generation: " << generation;
+    return oss.str();
 }

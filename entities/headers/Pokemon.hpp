@@ -35,6 +35,8 @@ public:
 
     void displayInfo() const;
 
+    std::string getInfoString() const;
+
 private :
     static int pokemonCount;
 
