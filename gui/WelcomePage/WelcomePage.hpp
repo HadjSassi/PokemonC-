@@ -8,7 +8,7 @@ public:
     WelcomePage();
 
     bool isFinished() const override;
-
+    void update() override;
     unique_ptr<BasePage> next() override;
 
 private:

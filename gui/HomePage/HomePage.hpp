@@ -9,6 +9,8 @@ public:
 
     unique_ptr<BasePage> next() override;
 
+    void update() override;
+
 protected:
     void onButtonClicked() override { CenteredActionPage::onButtonClicked(); }
 };

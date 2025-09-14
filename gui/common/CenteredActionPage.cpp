@@ -74,3 +74,5 @@ void CenteredActionPage::draw(sf::RenderTarget &target, sf::RenderStates states)
     target.draw(button, states);
     target.draw(label, states);
 }
+
+void CenteredActionPage::update() {}

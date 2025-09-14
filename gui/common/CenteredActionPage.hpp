@@ -19,6 +19,8 @@ public:
 
     void setVerticalMargin(float margin);
 
+    void update() override;
+
 protected:
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 

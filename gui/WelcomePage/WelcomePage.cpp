@@ -14,3 +14,5 @@ bool WelcomePage::isFinished() const {
 unique_ptr<BasePage> WelcomePage::next() {
     return make_unique<class HomePage>();
 }
+
+void WelcomePage::update() {}

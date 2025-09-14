@@ -11,11 +11,14 @@ RandomPage::RandomPage() : BasePage() {
     text_.setString("Exploration ...");
     text_.setCharacterSize(48);
     text_.setFillColor(sf::Color::Yellow);
+
+    video_ = std::make_unique<VideoPlayer>("../resources/vid/exploration", 24.0f);
 }
 
 
 bool RandomPage::isFinished() const {
-    return clock_.getElapsedTime().asSeconds() > 3.0f;
+    // return clock_.getElapsedTime().asSeconds() > 3.0f;
+    return video_->isFinished();
 }
 
 unique_ptr<BasePage> RandomPage::next() {
@@ -24,4 +27,12 @@ unique_ptr<BasePage> RandomPage::next() {
     } else {
         return make_unique<class FightPage>();
     }
+}
+
+void RandomPage::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    if (video_) target.draw(*video_, states);
+}
+
+void RandomPage::update() {
+    if (video_) video_->update();
 }

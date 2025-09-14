@@ -15,6 +15,8 @@ int main() {
             if (state) state->handleEvent(event);
         }
 
+        if (state) state->update();
+
         if (state && state->isFinished()) {
             auto next = state->next();
             if (next) state = std::move(next);

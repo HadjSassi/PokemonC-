@@ -15,3 +15,5 @@ HomePage::HomePage() : CenteredActionPage() {
 unique_ptr<BasePage> HomePage::next() {
     return make_unique<class RandomPage>();
 }
+
+void HomePage::update() {}
