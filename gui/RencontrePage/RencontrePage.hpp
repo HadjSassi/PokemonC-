@@ -3,9 +3,8 @@
 
 
 #include "../BasePage.hpp"
-
-
 #include "../common/CenteredActionPage.hpp"
+#include <random>
 
 class RencontrePage : public CenteredActionPage {
 public:
@@ -15,6 +14,13 @@ public:
 
 protected:
     void onButtonClicked() override { CenteredActionPage::onButtonClicked(); }
+
+private:
+    int pokemonId;
+    sf::Texture pokemonTexture;
+    sf::Sprite pokemonSprite;
+
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 };
 
 #endif //RENCONTREPAGE_HPP
