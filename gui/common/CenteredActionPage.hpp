@@ -7,7 +7,7 @@ class CenteredActionPage : public BasePage {
 public:
     CenteredActionPage();
 
-    void handleEvent(const sf::Event &event) override;
+    void handleEvent(const sf::Event& event, sf::Vector2u winSize) override;
 
     bool isFinished() const override { return clicked_; }
 

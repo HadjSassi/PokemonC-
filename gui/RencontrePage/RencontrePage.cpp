@@ -2,7 +2,7 @@
 #include "../HomePage/HomePage.hpp"
 #include <SFML/Window.hpp>
 
-RencontrePage::RencontrePage() : CenteredActionPage() {
+RencontrePage::RencontrePage() : CenteredActionPage(), popup(*text_.getFont()) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distrib(1, 898);
@@ -22,7 +22,7 @@ RencontrePage::RencontrePage() : CenteredActionPage() {
 }
 
 unique_ptr<BasePage> RencontrePage::next() {
-    return make_unique<class HomePage>();
+    return make_unique<class RencontrePage>();
 }
 
 void RencontrePage::draw(sf::RenderTarget& target, sf::RenderStates states) const {
@@ -37,4 +37,24 @@ void RencontrePage::draw(sf::RenderTarget& target, sf::RenderStates states) cons
     scaledSprite.setPosition(static_cast<float>(texSize.x * scale), 0);
 
     target.draw(scaledSprite, states);
+    popup.draw(target);
+}
+
+void RencontrePage::onButtonClicked() {
+    int result = std::rand() % 2;
+    if (result == 0)
+        popup.show("Pokemon flew unfortunately");
+    else
+        popup.show("Congratulation Pokemon well captured");
+}
+
+void RencontrePage::handleEvent(const sf::Event& event, sf::Vector2u winSize) {
+    if (popup.isVisible()) {
+        if (popup.handleEvent(event, winSize) && popup.wasButtonClicked()) {
+            CenteredActionPage::onButtonClicked();
+            popup.hide();
+        }
+    } else {
+        CenteredActionPage::handleEvent(event, winSize);
+    }
 }

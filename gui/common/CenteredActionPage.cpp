@@ -40,7 +40,7 @@ void CenteredActionPage::centerLabelInButton() {
     label_.setOrigin(lb.left + lb.width / 2.f, lb.top + lb.height / 2.f);
 }
 
-void CenteredActionPage::handleEvent(const sf::Event &event) {
+void CenteredActionPage::handleEvent(const sf::Event &event, sf::Vector2u winSize) {
     if (event.type == sf::Event::MouseButtonPressed &&
         event.mouseButton.button == sf::Mouse::Left) {
         sf::Vector2f mpos(static_cast<float>(event.mouseButton.x),

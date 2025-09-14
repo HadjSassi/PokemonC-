@@ -10,7 +10,7 @@ class BasePage : public sf::Drawable {
 public:
     BasePage();
 
-    virtual void handleEvent(const sf::Event &) {}
+    virtual void handleEvent(const sf::Event &, sf::Vector2u winSize) {}
     virtual void update() = 0;
     virtual bool isFinished() const { return false; }
     virtual unique_ptr<BasePage> next() { return nullptr; }

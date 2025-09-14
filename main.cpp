@@ -12,7 +12,7 @@ int main() {
         sf::Event event{};
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) window.close();
-            if (state) state->handleEvent(event);
+            if (state) state->handleEvent(event, window.getSize());
         }
 
         if (state) state->update();
