@@ -18,7 +18,9 @@ public:
 protected:
     sf::Text text_;
     sf::Font font_;
-
+    sf::Texture wallpaperTexture_;
+    sf::Sprite wallpaperSprite_;
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+    bool isWallpaper ;
 };
 #endif // BASEPAGE_HPP

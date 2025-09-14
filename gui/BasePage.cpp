@@ -3,9 +3,13 @@
 BasePage::BasePage() {
     font_.loadFromFile("../resources/font/arial.ttf");
     text_.setFont(font_);
+    wallpaperTexture_.loadFromFile("../resources/img/wallpaper.png");
+    wallpaperSprite_.setTexture(wallpaperTexture_);
+    isWallpaper = true;
 }
 
 void BasePage::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    if (isWallpaper) target.draw(wallpaperSprite_, states);
     sf::Text centered = text_;
 
     const auto bounds = centered.getLocalBounds();

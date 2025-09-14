@@ -13,11 +13,11 @@ RandomPage::RandomPage() : BasePage() {
     text_.setFillColor(sf::Color::Black);
 
     video_ = std::make_unique<VideoPlayer>("../resources/vid/exploration", 15.0f);
+    isWallpaper = false;
 }
 
 
 bool RandomPage::isFinished() const {
-    // return clock_.getElapsedTime().asSeconds() > 3.0f;
     return video_->isFinished();
 }
 
