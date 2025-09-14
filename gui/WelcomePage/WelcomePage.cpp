@@ -1,4 +1,3 @@
-
 #include "WelcomePage.hpp"
 #include "../HomePage/HomePage.hpp"
 
@@ -12,6 +11,6 @@ bool WelcomePage::isFinished() const {
     return clock_.getElapsedTime().asSeconds() > 1.0f;
 }
 
-std::unique_ptr<BasePage> WelcomePage::next() {
-    return std::make_unique<class HomePage>();
+unique_ptr<BasePage> WelcomePage::next() {
+    return make_unique<class HomePage>();
 }

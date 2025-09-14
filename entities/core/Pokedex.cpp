@@ -34,17 +34,17 @@ Pokedex::Pokedex() {
                     stod(champs[6]), stod(champs[7]),
                     stoi(champs[11]), stoi(champs[4])
                 ));
-            } catch (const std::exception& e) {
+            } catch (const std::exception &e) {
                 cerr << "Erreur de parsing ligne: " << ligne << " (" << e.what() << ")" << endl;
             }
         }
     }
 }
 
-void Pokedex::displayAllPokemons()  {
-    cout<<"All Pokemons in the Pokedex:"<<endl;
-    for (Pokemon pokemon : getPokemons()) {
+void Pokedex::displayAllPokemons() {
+    cout << "All Pokemons in the Pokedex:" << endl;
+    for (Pokemon pokemon: getPokemons()) {
         pokemon.displayInfo();
     }
-    cout<<"-----------------------"<<endl;
+    cout << "-----------------------" << endl;
 }

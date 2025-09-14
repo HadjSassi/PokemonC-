@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cassert>
-#include "../headers/Pokemon.hpp"
+#include "../entities/headers/Pokemon.hpp"
 
 using namespace std;
 

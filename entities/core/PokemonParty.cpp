@@ -1,6 +1,6 @@
 #include "../headers/PokemonParty.hpp"
 
-void PokemonParty::addPokemonToParty(const Pokemon& pokemon) {
+void PokemonParty::addPokemonToParty(const Pokemon &pokemon) {
     my_pokemons.push_back(pokemon);
 }
 
@@ -28,9 +28,9 @@ Pokemon PokemonParty::extractPokemonFromPartyByName(string name) {
     throw std::invalid_argument("Nom introuvable");
 }
 
-void PokemonParty::displayAllPokemons()  {
+void PokemonParty::displayAllPokemons() {
     cout << "All Pokemons in the party " << endl;
-    for (const Pokemon& pokemon : my_pokemons) {
+    for (const Pokemon &pokemon: my_pokemons) {
         pokemon.displayInfo();
     }
     cout << "-----------------------" << endl;

@@ -7,7 +7,7 @@ class FightPage : public CenteredActionPage {
 public:
     FightPage();
 
-    std::unique_ptr<BasePage> next() override;
+    unique_ptr<BasePage> next() override;
 
 protected:
     void onButtonClicked() override { CenteredActionPage::onButtonClicked(); }

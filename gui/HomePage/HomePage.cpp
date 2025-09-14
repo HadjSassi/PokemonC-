@@ -12,6 +12,6 @@ HomePage::HomePage() : CenteredActionPage() {
     setVerticalMargin(24.f);
 }
 
-std::unique_ptr<BasePage> HomePage::next() {
-    return std::make_unique<class RandomPage>();
+unique_ptr<BasePage> HomePage::next() {
+    return make_unique<class RandomPage>();
 }

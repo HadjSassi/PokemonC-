@@ -4,13 +4,16 @@
 
 int Pokemon::pokemonCount = 0;
 
-Pokemon::Pokemon(int id, string name, double hitPoint, double attack, double defense, int generation, int maxLife) : id(id),
-    name(name), hitPoint(hitPoint), attack(attack), defense(defense), generation(generation), maxLife(maxLife) {
+Pokemon::Pokemon(int id, string name, double hitPoint, double attack, double defense, int generation,
+                 int maxLife) : id(id),
+                                name(name), hitPoint(hitPoint), attack(attack), defense(defense),
+                                generation(generation), maxLife(maxLife) {
     pokemonCount++;
 }
 
 Pokemon::Pokemon(const Pokemon &pokemon) : id(pokemon.id), name(pokemon.name), hitPoint(pokemon.hitPoint),
-                                     attack(pokemon.attack), defense(pokemon.defense), generation(pokemon.generation), maxLife(pokemon.maxLife) {
+                                           attack(pokemon.attack), defense(pokemon.defense),
+                                           generation(pokemon.generation), maxLife(pokemon.maxLife) {
     pokemonCount++;
 }
 
@@ -48,7 +51,7 @@ int Pokemon::getMaxLife() const {
 
 void Pokemon::strike(Pokemon &target) const {
     if (target.getHitPoint() > 0)
-        target.getDamage((this->attack - target.defense>0) ? this->attack - target.defense : 0);
+        target.getDamage((this->attack - target.defense > 0) ? this->attack - target.defense : 0);
 }
 
 bool Pokemon::getDamage(int damage) {
@@ -58,13 +61,13 @@ bool Pokemon::getDamage(int damage) {
     return hitPoint > 0;
 }
 
-void Pokemon::heal(int amount){
-    if (hitPoint<=0)
-    hitPoint=amount;
+void Pokemon::heal(int amount) {
+    if (hitPoint <= 0)
+        hitPoint = amount;
     else
-    hitPoint+=amount;
-    if (hitPoint>maxLife)
-    hitPoint=maxLife;
+        hitPoint += amount;
+    if (hitPoint > maxLife)
+        hitPoint = maxLife;
 }
 
 int Pokemon::getPokemonCount() {
@@ -72,10 +75,10 @@ int Pokemon::getPokemonCount() {
 }
 
 void Pokemon::displayInfo() const {
-    cout << " ID: " << id ;
-    cout << " Name: " << name ;
-    cout << " Hit Points: " << hitPoint ;
-    cout << " Attack: " << attack ;
-    cout << " Defense: " << defense ;
+    cout << " ID: " << id;
+    cout << " Name: " << name;
+    cout << " Hit Points: " << hitPoint;
+    cout << " Attack: " << attack;
+    cout << " Defense: " << defense;
     cout << " Generation: " << generation << endl;
 }

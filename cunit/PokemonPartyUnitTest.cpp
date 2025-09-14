@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cassert>
-#include "../headers/PokemonParty.hpp"
+#include "../entities/headers/PokemonParty.hpp"
 
 using namespace std;
 
@@ -32,7 +32,8 @@ void testExtractionParIndex() {
     try {
         party.extractPokemonFromPartyByIndex(10);
         assert(false);
-    } catch (const std::out_of_range&) {}
+    } catch (const std::out_of_range &) {
+    }
 }
 
 void testExtractionParNom() {
@@ -50,7 +51,8 @@ void testExtractionParNom() {
     try {
         party.extractPokemonFromPartyByName("Inexistant");
         assert(false);
-    } catch (const std::invalid_argument&) {}
+    } catch (const std::invalid_argument &) {
+    }
 }
 
 void testAffichage() {

@@ -4,18 +4,6 @@ using namespace std;
 
 
 class Pokemon {
-
-private :
-    static int pokemonCount;
-
-    int id;
-    string name;
-    double hitPoint;
-    double attack;
-    double defense;
-    int generation;
-    int maxLife;
-
 public:
     Pokemon(int id, string name, double hitPoint, double attack, double defense, int generation, int maxLife);
 
@@ -46,4 +34,15 @@ public:
     ~Pokemon();
 
     void displayInfo() const;
+
+private :
+    static int pokemonCount;
+
+    int id;
+    string name;
+    double hitPoint;
+    double attack;
+    double defense;
+    int generation;
+    int maxLife;
 };

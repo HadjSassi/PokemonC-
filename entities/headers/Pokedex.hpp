@@ -5,12 +5,14 @@
 
 const string chemin = "../resources/database/pokedex.csv";
 
-class Pokedex: public PokemonVector {
-private:
-    static Pokedex* instance;
-    Pokedex();
-
+class Pokedex : public PokemonVector {
 public:
-    static Pokedex* getInstance();
+    static Pokedex *getInstance();
+
     void displayAllPokemons() override;
+
+private:
+    static Pokedex *instance;
+
+    Pokedex();
 };

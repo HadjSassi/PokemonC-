@@ -13,7 +13,7 @@ FightPage::FightPage() : CenteredActionPage() {
     setButtonText("Continue", 32, sf::Color::White);
 }
 
-std::unique_ptr<BasePage> FightPage::next() {
+unique_ptr<BasePage> FightPage::next() {
     // Exemple: retour à la HomePage après clic
-    return std::make_unique<class HomePage>();
+    return make_unique<class HomePage>();
 }

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cassert>
-#include "../headers/PokemonAttack.hpp"
+#include "../entities/headers/PokemonAttack.hpp"
 
 using namespace std;
 
@@ -17,7 +17,8 @@ void testCreateSetFromParty() {
     try {
         attackParty.createSetFromParty(10);
         assert(false);
-    } catch (const invalid_argument&) {}
+    } catch (const invalid_argument &) {
+    }
 }
 
 void testReintegrateAllToParty() {
