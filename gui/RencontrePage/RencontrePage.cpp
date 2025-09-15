@@ -30,7 +30,7 @@ void RencontrePage::selectRandomPokemon() {
         if (pokemonTexture.loadFromFile(path)) {
             pokemonSprite.setTexture(pokemonTexture);
         }
-    } while (!PokemonParty::getInstance()->hasPokemonWithId(pokemonId));
+    } while (PokemonParty::getInstance()->hasPokemonWithId(pokemonId));
 }
 
 unique_ptr<BasePage> RencontrePage::next() {
