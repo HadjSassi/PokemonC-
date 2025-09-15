@@ -6,15 +6,21 @@
 #include <vector>
 #include <string>
 
+struct Item {
+    int id;
+    std::string label;
+    bool checked;
+};
+
 class SelectBox : public sf::Drawable {
 public:
     SelectBox(const sf::Font &font, sf::Vector2f position, sf::Vector2f size);
 
     void handleEvent(const sf::Event &event, sf::Vector2u windowSize);
 
-    std::vector<std::string> getSelected() const;
+    std::vector<int> getSelectedIds() const;
 
-    void setItems(const std::vector<std::string>& items);
+    void setItems(const std::vector<std::pair<int, std::string>>& items);
 
     void setPosition(sf::Vector2f pos);
 
@@ -28,7 +34,7 @@ private:
     sf::RectangleShape box_;
     sf::Text searchText_;
     std::string searchInput_;
-    std::vector<std::pair<std::string, bool> > items_;
+    std::vector<Item> items_;
     std::vector<int> filteredIndices_;
     sf::Font font_;
     float scrollOffset_;

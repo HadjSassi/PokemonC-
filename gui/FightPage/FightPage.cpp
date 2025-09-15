@@ -23,8 +23,8 @@ FightPage::FightPage() : CenteredActionPage(), selectBox_(font_, {50.f, 100.f}, 
     valueTexts_.resize(6);
     pokeTextures_.resize(6);
     pokeSprites_.resize(6);
-
-    for (int i = 0; i < 6; ++i) {
+    int maxPokemons = PokemonParty::getInstance()->getPokemonsCount() > 6 ? 6 : PokemonParty::getInstance()->getPokemonsCount();
+    for (int i = 0; i < maxPokemons; ++i) {
         auto ptr = Pokedex::getInstance()->getPokemonByIndex(dis(gen));
         if (ptr) {
             randomPokemons_.push_back(*ptr);
@@ -40,25 +40,18 @@ FightPage::FightPage() : CenteredActionPage(), selectBox_(font_, {50.f, 100.f}, 
             pokeSprites_[i].setScale(100.f / pokeTextures_[i].getSize().x, 100.f / pokeTextures_[i].getSize().y);
         }
     }
-
-    std::vector<std::string> items;
-
-
-    for (Pokemon pokemonn : PokemonParty::getInstance()->getPokemons()) {
+    std::vector<std::pair<int, std::string>> items;
+    for (const Pokemon& pokemonn : PokemonParty::getInstance()->getPokemons()) {
         std::ostringstream oss;
         oss << pokemonn.getName() << " (ATT " << pokemonn.getAttack() << ", DEF " << pokemonn.getDefense() << ")";
-        items.push_back(oss.str());
+        items.emplace_back(pokemonn.getId(), oss.str());
     }
     selectBox_.setItems(items);
 }
+
 void FightPage::onButtonClicked() {
     CenteredActionPage::onButtonClicked();
-
-    auto selected = selectBox_.getSelected();
-    std::cout << "Selected items (" << selected.size() << "):\n";
-    for (const auto &s : selected) {
-        std::cout << " - " << s << '\n';
-    }
+    auto selected = selectBox_.getSelectedIds();
 }
 
 unique_ptr<BasePage> FightPage::next() {

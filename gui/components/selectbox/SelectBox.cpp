@@ -40,13 +40,14 @@ static float computeMaxScroll(int filteredSize, int visibleCount, float itemHeig
     return float(excess) * itemHeight;
 }
 
-void SelectBox::setItems(const std::vector<std::string>& items) {
+void SelectBox::setItems(const std::vector<std::pair<int, std::string>>& items) {
     items_.clear();
     items_.reserve(items.size());
-    for (const auto& s : items) items_.emplace_back(s, false);
+    for (const auto& p : items) items_.push_back({p.first, p.second, false});
     updateFilter();
     scrollOffset_ = 0.f;
 }
+
 void SelectBox::handleEvent(const sf::Event &event, sf::Vector2u /*windowSize*/) {
     if (event.type == sf::Event::TextEntered) {
         if (event.text.unicode == 8 && !searchInput_.empty()) // backspace
@@ -79,19 +80,16 @@ void SelectBox::handleEvent(const sf::Event &event, sf::Vector2u /*windowSize*/)
             sf::FloatRect rect(box_.getPosition().x + 8, y + (itemHeight_ - 20.f) / 2.f, 20.f, 20.f);
             if (rect.contains(mouse)) {
                 int idx = filteredIndices_[firstVisible + vi];
-                if (!items_[idx].second) {
-                    // Vérifier le nombre déjà sélectionné
+                if (!items_[idx].checked) {
                     int selectedCount = 0;
                     for (const auto& item : items_) {
-                        if (item.second) ++selectedCount;
+                        if (item.checked) ++selectedCount;
                     }
                     if (selectedCount < 6) {
-                        items_[idx].second = true;
+                        items_[idx].checked = true;
                     }
-                    // Sinon, ne rien faire (limite atteinte)
                 } else {
-                    // Permettre de décocher
-                    items_[idx].second = false;
+                    items_[idx].checked = false;
                 }
                 break;
             }
@@ -102,7 +100,7 @@ void SelectBox::handleEvent(const sf::Event &event, sf::Vector2u /*windowSize*/)
 void SelectBox::updateFilter() {
     filteredIndices_.clear();
     for (int i = 0; i < static_cast<int>(items_.size()); ++i) {
-        const auto& label = items_[i].first;
+        const auto& label = items_[i].label;
         if (searchInput_.empty() || label.find(searchInput_) != std::string::npos)
             filteredIndices_.push_back(i);
     }
@@ -110,10 +108,10 @@ void SelectBox::updateFilter() {
     scrollOffset_ = std::clamp(scrollOffset_, 0.f, maxScroll);
 }
 
-std::vector<std::string> SelectBox::getSelected() const {
-    std::vector<std::string> res;
-    for (const auto &item: items_)
-        if (item.second) res.push_back(item.first);
+std::vector<int> SelectBox::getSelectedIds() const {
+    std::vector<int> res;
+    for (const auto& item : items_)
+        if (item.checked) res.push_back(item.id);
     return res;
 }
 
@@ -159,14 +157,14 @@ void SelectBox::draw(sf::RenderTarget &target, sf::RenderStates states) const {
         int idx = filteredIndices_[firstVisible + vi];
         sf::RectangleShape checkbox({20.f, 20.f});
         checkbox.setPosition(checkboxX, y + (itemHeight_ - 20.f) / 2.f);
-        checkbox.setFillColor(items_[idx].second ? sf::Color::Green : sf::Color::White);
+        checkbox.setFillColor(items_[idx].checked ? sf::Color::Green : sf::Color::White);
         target.draw(checkbox, states);
 
         sf::Text label;
         label.setFont(font_);
         label.setCharacterSize(18);
         label.setFillColor(sf::Color::White);
-        label.setString(items_[idx].first);
+        label.setString(items_[idx].label);
 
         // ensure scale is reset
         label.setScale(1.f, 1.f);
