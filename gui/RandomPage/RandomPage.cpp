@@ -7,7 +7,7 @@
 RandomPage::RandomPage() : BasePage() {
     random_device rd;
     mt19937 gen(rd());
-    uniform_int_distribution<int> dist(0, 99);
+    uniform_int_distribution<int> dist(0, 1);
     value_ = dist(gen);
 
     text_.setString("Exploration ...");

@@ -51,3 +51,7 @@ bool PokemonParty::hasPokemonWithId(int index) {
     }
     return false;
 }
+
+const vector<Pokemon> &PokemonParty::getPokemons() const {
+    return my_pokemons;
+}

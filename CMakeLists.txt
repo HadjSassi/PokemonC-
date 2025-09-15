@@ -31,7 +31,9 @@ add_executable(pokemon main.cpp
         gui/VideoPlayer/VideoPlayer.cpp
         gui/VideoPlayer/VideoPlayer.hpp
         gui/components/popup/Popup.cpp
-        gui/components/popup/Popup.hpp)
+        gui/components/popup/Popup.hpp
+        gui/components/selectbox/SelectBox.cpp
+        gui/components/selectbox/SelectBox.hpp)
 
 add_executable(pokemonUnitTest cunit/PokemonUnitTest.cpp
         entities/core/Pokemon.cpp

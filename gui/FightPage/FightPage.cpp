@@ -3,8 +3,10 @@
 #include <random>
 
 #include "../../entities/headers/Pokedex.hpp"
+#include "../../entities/headers/PokemonParty.hpp"
 
-FightPage::FightPage() : CenteredActionPage() {
+FightPage::FightPage() : CenteredActionPage(), selectBox_(font_, {50.f, 100.f}, {200.f, 400.f})
+{
     text_.setString("Fight");
     text_.setCharacterSize(48);
     text_.setFillColor(sf::Color::Red);
@@ -15,7 +17,7 @@ FightPage::FightPage() : CenteredActionPage() {
 
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(0, 799);
+    std::uniform_int_distribution<> dis(1, 799);
 
     randomPokemons_.clear();
     valueTexts_.resize(6);
@@ -38,15 +40,39 @@ FightPage::FightPage() : CenteredActionPage() {
             pokeSprites_[i].setScale(100.f / pokeTextures_[i].getSize().x, 100.f / pokeTextures_[i].getSize().y);
         }
     }
+
+    std::vector<std::string> items;
+
+
+    for (Pokemon pokemonn : PokemonParty::getInstance()->getPokemons()) {
+        std::ostringstream oss;
+        oss << pokemonn.getName();
+        items.push_back(oss.str());
+    }
+    selectBox_.setItems(items);
+}
+void FightPage::onButtonClicked() {
+    CenteredActionPage::onButtonClicked();
+
+    auto selected = selectBox_.getSelected();
+    std::cout << "Selected items (" << selected.size() << "):\n";
+    for (const auto &s : selected) {
+        std::cout << " - " << s << '\n';
+    }
 }
 
 unique_ptr<BasePage> FightPage::next() {
     return make_unique<class HomePage>();
 }
 
+void FightPage::handleEvent(const sf::Event& event, sf::Vector2u window) {
+    CenteredActionPage::handleEvent(event, window);
+    selectBox_.handleEvent(event, window);
+}
 
 void FightPage::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     CenteredActionPage::draw(target, states);
+    target.draw(selectBox_, states);
 
     const sf::View& view = target.getView();
     const sf::Vector2f center = view.getCenter();

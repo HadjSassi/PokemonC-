@@ -16,6 +16,8 @@ public:
 
     bool hasPokemonWithId(int index);
 
+    const vector<Pokemon> &getPokemons() const;
+
 private:
     static PokemonParty *instance;
 
