@@ -4,7 +4,7 @@
 
 #include "../BasePage.hpp"
 #include "../common/CenteredActionPage.hpp"
-#include "../components/Popup.hpp"
+#include "../components/popup/Popup.hpp"
 #include "../../entities/headers/Pokemon.hpp"
 #include <random>
 

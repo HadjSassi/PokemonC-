@@ -30,8 +30,8 @@ add_executable(pokemon main.cpp
         gui/common/CenteredActionPage.hpp
         gui/VideoPlayer/VideoPlayer.cpp
         gui/VideoPlayer/VideoPlayer.hpp
-        gui/components/Popup.cpp
-        gui/components/Popup.hpp)
+        gui/components/popup/Popup.cpp
+        gui/components/popup/Popup.hpp)
 
 add_executable(pokemonUnitTest cunit/PokemonUnitTest.cpp
         entities/core/Pokemon.cpp

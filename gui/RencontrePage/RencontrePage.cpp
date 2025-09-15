@@ -21,10 +21,9 @@ void RencontrePage::selectRandomPokemon() {
         Pokedex *pokedex = Pokedex::getInstance();
         std::random_device rd;
         std::mt19937 gen(rd());
-        // std::uniform_int_distribution<> distrib(1, 898); //todo make it back
-        std::uniform_int_distribution<> distrib(1, 10);
+        std::uniform_int_distribution<> distrib(1, 799);
+        // std::uniform_int_distribution<> distrib(1, 10);
         pokemonId = distrib(gen);
-        // pokemonId = 834; // Todo i don't know why this is not working
         pokemon = pokedex->getPokemonByIndex(pokemonId);
         std::string path = "../resources/img/pokemons/" + std::to_string(pokemonId) + ".png";
         if (pokemonTexture.loadFromFile(path)) {
