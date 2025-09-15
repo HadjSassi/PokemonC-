@@ -46,7 +46,7 @@ FightPage::FightPage() : CenteredActionPage(), selectBox_(font_, {50.f, 100.f}, 
 
     for (Pokemon pokemonn : PokemonParty::getInstance()->getPokemons()) {
         std::ostringstream oss;
-        oss << pokemonn.getName();
+        oss << pokemonn.getName() << " (ATT " << pokemonn.getAttack() << ", DEF " << pokemonn.getDefense() << ")";
         items.push_back(oss.str());
     }
     selectBox_.setItems(items);

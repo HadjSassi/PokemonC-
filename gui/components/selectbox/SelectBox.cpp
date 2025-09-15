@@ -79,7 +79,20 @@ void SelectBox::handleEvent(const sf::Event &event, sf::Vector2u /*windowSize*/)
             sf::FloatRect rect(box_.getPosition().x + 8, y + (itemHeight_ - 20.f) / 2.f, 20.f, 20.f);
             if (rect.contains(mouse)) {
                 int idx = filteredIndices_[firstVisible + vi];
-                items_[idx].second = !items_[idx].second;
+                if (!items_[idx].second) {
+                    // Vérifier le nombre déjà sélectionné
+                    int selectedCount = 0;
+                    for (const auto& item : items_) {
+                        if (item.second) ++selectedCount;
+                    }
+                    if (selectedCount < 6) {
+                        items_[idx].second = true;
+                    }
+                    // Sinon, ne rien faire (limite atteinte)
+                } else {
+                    // Permettre de décocher
+                    items_[idx].second = false;
+                }
                 break;
             }
         }
