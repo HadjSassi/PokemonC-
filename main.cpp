@@ -1,13 +1,18 @@
 #include "gui/WelcomePage/WelcomePage.hpp"
 #include <SFML/Graphics.hpp>
-
+#include <SFML/Audio.hpp>
 #include "entities/headers/PokemonAttack.hpp"
 #include "gui/FightingPage/FightingPage.hpp"
 #include "gui/HomePage/HomePage.hpp"
 int main() {
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
     sf::RenderWindow window(desktop, "Pokemon The Game", sf::Style::Default);
-
+    sf::Music music;
+    if (!music.openFromFile("../resources/music/son.mp3")) {
+        return -1;
+    }
+    music.setLoop(true);
+    music.play();
     std::unique_ptr<BasePage> state = std::make_unique<WelcomePage>();
     // std::unique_ptr<BasePage> state = std::make_unique<HomePage>();
 
