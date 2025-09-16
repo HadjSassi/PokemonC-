@@ -6,12 +6,13 @@
 #include "../common/CenteredActionPage.hpp"
 #include "../components/popup/Popup.hpp"
 #include "../../entities/headers/Pokemon.hpp"
+#include "../../entities/headers/PokemonParty.hpp"
 #include <random>
 
 
 class RencontrePage : public CenteredActionPage {
 public:
-    RencontrePage();
+    RencontrePage(PokemonParty &partie);
     void selectRandomPokemon();
     unique_ptr<BasePage> next() override;
 
@@ -19,11 +20,12 @@ protected:
     void onButtonClicked() override ;
     void handleEvent(const sf::Event& event, sf::Vector2u winSize) override;
 private:
-    int pokemonId;
+    int pokemonId{};
     sf::Texture pokemonTexture;
     sf::Sprite pokemonSprite;
     Popup popup;
-    Pokemon *pokemon;
+    Pokemon *pokemon{};
+    PokemonParty& party ;
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 };
 

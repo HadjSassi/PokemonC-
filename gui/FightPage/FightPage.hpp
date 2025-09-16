@@ -4,10 +4,11 @@
 #include "../../entities/headers/Pokemon.hpp"
 #include "../common/CenteredActionPage.hpp"
 #include "../components/selectbox/SelectBox.hpp"
+#include "../../entities/headers/PokemonParty.hpp"
 
 class FightPage : public CenteredActionPage {
 public:
-    FightPage();
+    FightPage(PokemonParty &partie);
 
     unique_ptr<BasePage> next() override;
 
@@ -23,6 +24,6 @@ private:
     std::vector<sf::Texture> pokeTextures_;
     mutable std::vector<sf::Sprite> pokeSprites_;
     SelectBox selectBox_;
-
+    PokemonParty& party ;
 };
 #endif //POKEMON_FIGHTPAGE_HPP

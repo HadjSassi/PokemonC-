@@ -3,10 +3,11 @@
 #include <random>
 
 #include "../../entities/headers/Pokedex.hpp"
-#include "../../entities/headers/PokemonParty.hpp"
+#include "../../entities/headers/PokemonAttack.hpp"
 
-FightPage::FightPage() : CenteredActionPage(), selectBox_(font_, {50.f, 100.f}, {200.f, 400.f})
-{
+FightPage::FightPage(PokemonParty &partie) : CenteredActionPage(), party(partie),
+                                                   selectBox_(font_, {50.f, 100.f}, {200.f, 400.f}) {
+
     text_.setString("Fight");
     text_.setCharacterSize(48);
     text_.setFillColor(sf::Color::Red);
@@ -23,7 +24,9 @@ FightPage::FightPage() : CenteredActionPage(), selectBox_(font_, {50.f, 100.f}, 
     valueTexts_.resize(6);
     pokeTextures_.resize(6);
     pokeSprites_.resize(6);
-    int maxPokemons = PokemonParty::getInstance()->getPokemonsCount() > 6 ? 6 : PokemonParty::getInstance()->getPokemonsCount();
+    int maxPokemons = party.getPokemonsCount() > 6
+                          ? 6
+                          : party.getPokemonsCount();
     for (int i = 0; i < maxPokemons; ++i) {
         auto ptr = Pokedex::getInstance()->getPokemonByIndex(dis(gen));
         if (ptr) {
@@ -40,8 +43,8 @@ FightPage::FightPage() : CenteredActionPage(), selectBox_(font_, {50.f, 100.f}, 
             pokeSprites_[i].setScale(100.f / pokeTextures_[i].getSize().x, 100.f / pokeTextures_[i].getSize().y);
         }
     }
-    std::vector<std::pair<int, std::string>> items;
-    for (const Pokemon& pokemonn : PokemonParty::getInstance()->getPokemons()) {
+    std::vector<std::pair<int, std::string> > items;
+    for (const Pokemon &pokemonn: party.getPokemons()) {
         std::ostringstream oss;
         oss << pokemonn.getName() << " (ATT " << pokemonn.getAttack() << ", DEF " << pokemonn.getDefense() << ")";
         items.emplace_back(pokemonn.getId(), oss.str());
@@ -55,19 +58,19 @@ void FightPage::onButtonClicked() {
 }
 
 unique_ptr<BasePage> FightPage::next() {
-    return make_unique<class HomePage>();
+    return make_unique<class HomePage>(party);
 }
 
-void FightPage::handleEvent(const sf::Event& event, sf::Vector2u window) {
+void FightPage::handleEvent(const sf::Event &event, sf::Vector2u window) {
     CenteredActionPage::handleEvent(event, window);
     selectBox_.handleEvent(event, window);
 }
 
-void FightPage::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+void FightPage::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     CenteredActionPage::draw(target, states);
     target.draw(selectBox_, states);
 
-    const sf::View& view = target.getView();
+    const sf::View &view = target.getView();
     const sf::Vector2f center = view.getCenter();
     const sf::Vector2f size = view.getSize();
 
@@ -86,7 +89,7 @@ void FightPage::draw(sf::RenderTarget& target, sf::RenderStates states) const {
         pokeSprites_[i].setPosition(col1X, y);
         target.draw(pokeSprites_[i], states);
 
-        auto& txt = valueTexts_[i];
+        auto &txt = valueTexts_[i];
         txt.setPosition(col2X, y + (imgSize - txt.getLocalBounds().height) / 2.f);
         target.draw(txt, states);
     }

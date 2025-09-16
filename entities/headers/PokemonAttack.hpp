@@ -9,6 +9,8 @@ public:
 
     void reintegrateDeadToParty();
 
+    void createSetFromParty(const vector<int> & vector);
+
 private:
     static const int MAX_POKEMON_PER_PARTY = 6;
     vector<Pokemon> attack_team;

@@ -1,8 +1,11 @@
+#ifndef POKEMONPARTY_HPP
+#define POKEMONPARTY_HPP
 #include "PokemonVector.hpp"
 
 class PokemonParty : public PokemonVector {
 public:
-    static PokemonParty *getInstance();
+
+    PokemonParty();
 
     int getPokemonsCount() const;
 
@@ -19,9 +22,6 @@ public:
     const vector<Pokemon> &getPokemons() const;
 
 private:
-    static PokemonParty *instance;
-
-    PokemonParty() = default;
-
     vector<Pokemon> my_pokemons;
 };
+#endif // POKEMONPARTY_HPP

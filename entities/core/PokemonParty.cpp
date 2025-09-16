@@ -1,10 +1,8 @@
 #include "../headers/PokemonParty.hpp"
 
-PokemonParty* PokemonParty::instance = nullptr;
-
-PokemonParty* PokemonParty::getInstance() {
-    if (!instance) instance = new PokemonParty();
-    return instance;
+PokemonParty::PokemonParty(): PokemonVector() {
+    my_pokemons = vector<Pokemon>();
+    my_pokemons.clear();
 }
 
 void PokemonParty::addPokemonToParty(const Pokemon &pokemon) {

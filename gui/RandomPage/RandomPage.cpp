@@ -4,7 +4,7 @@
 #include "../RencontrePage/RencontrePage.hpp"
 #include "../FightPage/FightPage.hpp"
 
-RandomPage::RandomPage() : BasePage() {
+RandomPage::RandomPage(PokemonParty &partie) : BasePage(), party(partie) {
     random_device rd;
     mt19937 gen(rd());
     uniform_int_distribution<int> dist(0, 1);
@@ -24,10 +24,10 @@ bool RandomPage::isFinished() const {
 }
 
 unique_ptr<BasePage> RandomPage::next() {
-    if ( PokemonParty::getInstance()->getPokemonsCount() == 0 || value_ % 2 == 0) {
-        return make_unique<class RencontrePage>();
+    if ( party.getPokemonsCount() == 0 || value_ % 2 == 0) {
+        return make_unique<class RencontrePage>(party);
     } else {
-        return make_unique<class FightPage>();
+        return make_unique<class FightPage>(party);
     }
 }
 

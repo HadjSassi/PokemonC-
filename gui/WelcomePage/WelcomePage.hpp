@@ -3,10 +3,11 @@
 #include "../BasePage.hpp"
 #include <SFML/Graphics.hpp>
 #include "../VideoPlayer/VideoPlayer.hpp"
+#include "../../entities/headers/PokemonParty.hpp"
 
 class WelcomePage : public BasePage {
 public:
-    WelcomePage();
+    WelcomePage(PokemonParty& partyRef);
 
     bool isFinished() const override;
 
@@ -19,6 +20,6 @@ public:
 private:
     sf::Clock clock_;
     std::unique_ptr<VideoPlayer> video_;
-
+    PokemonParty &party;
 };
 #endif // WELCOMEPAGE_HPP

@@ -4,7 +4,7 @@
 #include "../../entities/headers/Pokedex.hpp"
 #include "../../entities/headers/PokemonParty.hpp"
 
-RencontrePage::RencontrePage() : CenteredActionPage(), popup(*text_.getFont()) {
+RencontrePage::RencontrePage(PokemonParty &partie) : CenteredActionPage(), popup(*text_.getFont()), party(partie){
     selectRandomPokemon();
 
     text_.setString("Rencontre");
@@ -29,11 +29,11 @@ void RencontrePage::selectRandomPokemon() {
         if (pokemonTexture.loadFromFile(path)) {
             pokemonSprite.setTexture(pokemonTexture);
         }
-    } while (PokemonParty::getInstance()->hasPokemonWithId(pokemonId));
+    } while (party.hasPokemonWithId(pokemonId));
 }
 
 unique_ptr<BasePage> RencontrePage::next() {
-    return make_unique<class HomePage>();
+    return make_unique<class HomePage>(party);
 }
 
 void RencontrePage::draw(sf::RenderTarget &target, sf::RenderStates states) const {
@@ -67,7 +67,7 @@ void RencontrePage::onButtonClicked() {
     if (result == 0)
         popup.show("Pokemon flew unfortunately");
     else {
-        PokemonParty::getInstance()->addPokemonToParty(*pokemon);
+        party.addPokemonToParty(*pokemon);
         popup.show("Congratulation Pokemon well captured");
     }
 }

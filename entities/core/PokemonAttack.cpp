@@ -35,3 +35,8 @@ void PokemonAttack::reintegrateDeadToParty() {
         }
     }
 }
+
+void PokemonAttack::createSetFromParty(const vector<int> &vector) {
+    for (int index : vector)
+        attack_team.push_back(extractPokemonFromPartyByIndex(index));
+}

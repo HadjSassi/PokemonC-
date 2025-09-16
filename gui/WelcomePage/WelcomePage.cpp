@@ -1,7 +1,7 @@
 #include "WelcomePage.hpp"
 #include "../HomePage/HomePage.hpp"
 
-WelcomePage::WelcomePage() : BasePage() {
+WelcomePage::WelcomePage(PokemonParty& partyRef) : BasePage(), party(partyRef) {
     text_.setString("POKEMON the Game!");
     text_.setCharacterSize(48);
     text_.setFillColor(sf::Color::White);
@@ -14,7 +14,7 @@ bool WelcomePage::isFinished() const {
 }
 
 unique_ptr<BasePage> WelcomePage::next() {
-    return make_unique<class HomePage>();
+    return make_unique<class HomePage>(party);
 }
 
 void WelcomePage::draw(sf::RenderTarget &target, sf::RenderStates states) const {
