@@ -3,6 +3,7 @@
 
 #include "../../entities/headers/PokemonAttack.hpp"
 #include "../common/CenteredActionPage.hpp"
+#include "../components/popup/Popup.hpp"
 
 class FightingPage : public CenteredActionPage {
 public:
@@ -21,7 +22,7 @@ protected:
 
 private:
     std::vector<Pokemon> randomPokemons_;
-
+    Popup popup_;
     void makeWar();
 };
 

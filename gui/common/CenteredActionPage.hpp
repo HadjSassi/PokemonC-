@@ -1,6 +1,8 @@
 #ifndef CENTERED_ACTION_PAGE_HPP
 #define CENTERED_ACTION_PAGE_HPP
 
+#include <optional>
+
 #include "../BasePage.hpp"
 
 class CenteredActionPage : public BasePage {
@@ -17,6 +19,8 @@ public:
 
     void setButtonText(const sf::String &label, unsigned int charSize = 32, const sf::Color &color = sf::Color::White);
 
+    void setButtonPosition(const sf::Vector2f& pos);
+
     void setVerticalMargin(float margin);
 
     void update() override;
@@ -29,6 +33,7 @@ protected:
 private:
     sf::RectangleShape button_;
     sf::Text label_;
+    optional<sf::Vector2f> buttonPosition_;
     float margin_ = 24.f;
 
     mutable sf::FloatRect buttonBounds_{};

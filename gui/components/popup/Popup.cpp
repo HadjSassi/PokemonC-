@@ -38,8 +38,14 @@ void Popup::updateLayout(sf::Vector2u winSize) {
     float popupWidth = bounds.width + 2 * marginX;
     float popupHeight = bounds.height + 2 * marginY + 70.f;
 
-    float x = winSize.x - popupWidth - 40;
-    float y = (winSize.y - popupHeight) / 2.f;
+    float x, y;
+    if (customPosition_) {
+        x = customPosition_->x;
+        y = customPosition_->y;
+    } else {
+        x = winSize.x - popupWidth - 40;
+        y = (winSize.y - popupHeight) / 2.f;
+    }
     box.setSize({popupWidth, popupHeight});
     box.setPosition(x, y);
 
@@ -80,6 +86,10 @@ bool Popup::handleEvent(const sf::Event& event, sf::Vector2u winSize) {
         }
     }
     return false;
+}
+
+void Popup::setPosition(const sf::Vector2f& pos) {
+    customPosition_ = pos;
 }
 
 bool Popup::wasButtonClicked() const {

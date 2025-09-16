@@ -6,15 +6,14 @@
 #include "../FightingPage/FightingPage.hpp"
 
 FightPage::FightPage() : CenteredActionPage(),
-                                                   selectBox_(font_, {50.f, 100.f}, {200.f, 400.f}) {
-
-    text_.setString("Fight");
+                         selectBox_(font_, {50.f, 100.f}, {200.f, 400.f}) {
+    text_.setString("To Fight");
     text_.setCharacterSize(48);
     text_.setFillColor(sf::Color::Red);
 
     setButtonSize({220.f, 64.f});
     setButtonColors(sf::Color(178, 34, 34), sf::Color::Black, 2.f);
-    setButtonText("Continue", 32, sf::Color::White);
+    setButtonText("Proceed", 32, sf::Color::White);
 
     std::random_device rd;
     std::mt19937 gen(rd());

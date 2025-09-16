@@ -8,11 +8,16 @@
 class PokemonAttack;
 
 FightingPage::FightingPage(std::vector<Pokemon> &randomPokemons)
-    : CenteredActionPage(), randomPokemons_(std::move(randomPokemons)) {
+    : CenteredActionPage(), popup_(font_), randomPokemons_(std::move(randomPokemons)) {
+    isWallpaper = false;
+    setButtonSize({720.f, 64.f});
+    setButtonColors(sf::Color(178, 34, 34), sf::Color::Black, 2.f);
+    setButtonText("Fight", 32, sf::Color::White);
+    setButtonPosition({1000.f, 900.f});
+    popup_.setPosition({600.f, 400.f});
 }
 
 void FightingPage::onButtonClicked() {
-    CenteredActionPage::onButtonClicked();
     makeWar();
 }
 
@@ -21,8 +26,15 @@ void FightingPage::makeWar() {
 }
 
 
-void FightingPage::handleEvent(const sf::Event &event, sf::Vector2u window) {
-    CenteredActionPage::handleEvent(event, window);
+void FightingPage::handleEvent(const sf::Event &event, sf::Vector2u winSize) {
+    if (popup_.isVisible()) {
+        if (popup_.handleEvent(event, winSize) && popup_.wasButtonClicked()) {
+            CenteredActionPage::onButtonClicked();
+            popup_.hide();
+        }
+    } else {
+        CenteredActionPage::handleEvent(event, winSize);
+    }
 }
 
 unique_ptr<BasePage> FightingPage::next() {
@@ -34,91 +46,73 @@ unique_ptr<BasePage> FightingPage::previous() {
 }
 
 void FightingPage::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-    const float rowHeight = 100.f;
-    const float margin = 20.f;
+    CenteredActionPage::draw(target, states);
+
     const sf::View &view = target.getView();
     const sf::Vector2f center = view.getCenter();
 
-    float startY = center.y - ((PokemonParty::getInstance().attack->getMyPokemons().size() * rowHeight + (
-                                    PokemonParty::getInstance().attack->getMyPokemons().size() - 1) * margin) / 2.f);
+    float startY = center.y - 200.f;
+    float rowHeight = 120.f;
 
-    float attackColX = center.x - 400.f;
-    float vsColX = center.x;
-    float randomColX = center.x + 100.f;
+    float colOurX = center.x - 200.f;
+    float colVsX = center.x;
+    float colEnemyX = center.x + 200.f;
 
-    // Utilisation de font_ hérité
-    sf::Text attackHeader("My Pokemons", font_, 24);
-    attackHeader.setPosition(attackColX, startY - 40.f);
-    target.draw(attackHeader, states);
+    sf::Texture versusTexture;
+    versusTexture.loadFromFile("../resources/img/versusSmall.png");
+    sf::Vector2f versusSize(versusTexture.getSize().x, versusTexture.getSize().y);
 
-    sf::Text vsHeader("VS", font_, 24);
-    vsHeader.setPosition(vsColX, startY - 40.f);
-    target.draw(vsHeader, states);
+    auto &myPokemons = PokemonParty::getInstance().attack->getMyPokemons();
 
-    sf::Text randomHeader("The Ennemies", font_, 24);
-    randomHeader.setPosition(randomColX, startY - 40.f);
-    target.draw(randomHeader, states);
+    for (size_t i = 0; i < myPokemons.size(); ++i) {
+        float y = startY + i * rowHeight;
 
-    for (size_t i = 0; i < PokemonParty::getInstance().attack->getMyPokemons().size(); ++i) {
-        float y = startY + i * (rowHeight + margin);
-
-        const Pokemon &atk = PokemonParty::getInstance().attack->getMyPokemons()[i];
-        std::ostringstream defStream;
-        defStream << std::fixed << std::setprecision(2) << atk.getDefense();
-        sf::Text atkDef(defStream.str(), font_, 20);
-        atkDef.setPosition(attackColX, y);
-        target.draw(atkDef, states);
-
-        std::ostringstream atkStream;
-        atkStream << std::fixed << std::setprecision(2) << atk.getAttack();
-        sf::Text atkAtk(atkStream.str(), font_, 20);
-        atkAtk.setPosition(attackColX + 80.f, y);
-        target.draw(atkAtk, states);
-
-        sf::Text atkName(atk.getName(), font_, 20);
-        atkName.setPosition(attackColX + 160.f, y);
-        target.draw(atkName, states);
-
+        // --- Notre Pokémon ---
+        const Pokemon &atk = myPokemons[i];
         sf::Texture atkTexture;
-        std::ostringstream atkImgPath;
-        atkImgPath << "../resources/img/pokemons/" << atk.getId() << ".png";
-        atkTexture.loadFromFile(atkImgPath.str());
+        atkTexture.loadFromFile("../resources/img/pokemons/" + std::to_string(atk.getId()) + ".png");
         sf::Sprite atkSprite(atkTexture);
-        atkSprite.setPosition(attackColX + 300.f, y);
-        atkSprite.setScale(60.f / atkTexture.getSize().x, 60.f / atkTexture.getSize().y);
-        target.draw(atkSprite, states);
+        float imgSize = 60.f;
+        atkSprite.setScale(imgSize / atkTexture.getSize().x, imgSize / atkTexture.getSize().y);
 
-        sf::Text vsText("VS", font_, 20);
-        vsText.setPosition(vsColX, y + 20.f);
-        target.draw(vsText, states);
+        sf::Text atkText(atk.getName(), font_, 20);
+        sf::FloatRect textBounds = atkText.getLocalBounds();
+
+        float totalHeight = imgSize + 8.f + textBounds.height;
+        float blockY = y + (rowHeight - totalHeight) / 2.f;
+
+        atkSprite.setPosition(colOurX, blockY);
+        atkText.setPosition(colOurX, blockY + imgSize + 8.f);
+
+        target.draw(atkSprite, states);
+        target.draw(atkText, states);
+
+        sf::Sprite versusSprite(versusTexture);
+        float vsY = blockY + (totalHeight - versusSize.y) / 2.f;
+        versusSprite.setPosition(colVsX, vsY);
+        target.draw(versusSprite, states);
 
         if (i < randomPokemons_.size()) {
             const Pokemon &rnd = randomPokemons_[i];
             sf::Texture rndTexture;
-            std::ostringstream rndImgPath;
-            rndImgPath << "../resources/img/pokemons/" << rnd.getId() << ".png";
-            rndTexture.loadFromFile(rndImgPath.str());
+            rndTexture.loadFromFile("../resources/img/pokemons/" + std::to_string(rnd.getId()) + ".png");
             sf::Sprite rndSprite(rndTexture);
-            rndSprite.setPosition(randomColX, y);
-            rndSprite.setScale(60.f / rndTexture.getSize().x, 60.f / rndTexture.getSize().y);
+            rndSprite.setScale(imgSize / rndTexture.getSize().x, imgSize / rndTexture.getSize().y);
+
+            sf::Text rndText(rnd.getName(), font_, 20);
+            sf::FloatRect rndTextBounds = rndText.getLocalBounds();
+
+            float enemyTotalHeight = imgSize + 8.f + rndTextBounds.height;
+            float enemyBlockY = y + (rowHeight - enemyTotalHeight) / 2.f;
+
+            rndSprite.setPosition(colEnemyX, enemyBlockY);
+            rndText.setPosition(colEnemyX, enemyBlockY + imgSize + 8.f);
+
             target.draw(rndSprite, states);
-
-            sf::Text rndName(rnd.getName(), font_, 20);
-            rndName.setPosition(randomColX + 80.f, y);
-            target.draw(rndName, states);
-
-
-            std::ostringstream defRandStream;
-            defRandStream << std::fixed << std::setprecision(2) << atk.getDefense();
-            sf::Text rndAtk(defRandStream.str(), font_, 20);
-            rndAtk.setPosition(randomColX + 200.f, y);
-            target.draw(rndAtk, states);
-
-            std::ostringstream atkRandStream;
-            atkRandStream << std::fixed << std::setprecision(2) << atk.getAttack();
-            sf::Text rndDef(atkRandStream.str(), font_, 20);
-            rndDef.setPosition(randomColX + 280.f, y);
-            target.draw(rndDef, states);
+            target.draw(rndText, states);
+            if (popup_.isVisible()) {
+                popup_.draw(target);
+            }
         }
     }
 }

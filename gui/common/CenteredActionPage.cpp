@@ -18,6 +18,10 @@ void CenteredActionPage::setButtonSize(const sf::Vector2f &size) {
     centerLabelInButton();
 }
 
+void CenteredActionPage::setButtonPosition(const sf::Vector2f& pos) {
+    buttonPosition_ = pos;
+}
+
 void CenteredActionPage::setButtonColors(const sf::Color &fill, const sf::Color &outline, float outlineThickness) {
     button_.setFillColor(fill);
     button_.setOutlineColor(outline);
@@ -58,13 +62,19 @@ void CenteredActionPage::draw(sf::RenderTarget &target, sf::RenderStates states)
     const sf::View &view = target.getView();
     const sf::Vector2f center = view.getCenter();
 
-    const auto tb = text_.getLocalBounds();
-    const float textHalfH = tb.top + tb.height / 2.f;
-
     sf::RectangleShape button = button_;
     const sf::Vector2f bsize = button.getSize();
     button.setOrigin(bsize.x / 2.f, bsize.y / 2.f);
-    button.setPosition(center.x, center.y + textHalfH + margin_ + bsize.y / 2.f);
+
+    sf::Vector2f pos;
+    if (buttonPosition_) {
+        pos = *buttonPosition_;
+    } else {
+        const auto tb = text_.getLocalBounds();
+        const float textHalfH = tb.top + tb.height / 2.f;
+        pos = {center.x, center.y + textHalfH + margin_ + bsize.y / 2.f};
+    }
+    button.setPosition(pos);
 
     sf::Text label = label_;
     label.setPosition(button.getPosition().x, button.getPosition().y - 4.f);

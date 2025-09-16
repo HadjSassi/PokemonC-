@@ -1,6 +1,7 @@
 #ifndef POKEMON_POPUP_HPP
 #define POKEMON_POPUP_HPP
 
+#include <optional>
 #include <SFML/Graphics.hpp>
 #include <string>
 
@@ -14,6 +15,7 @@ public:
 
     void draw(sf::RenderTarget& target) const;
     bool handleEvent(const sf::Event& event, sf::Vector2u winSize);
+    void setPosition(const sf::Vector2f& pos);
 
     bool wasButtonClicked() const;
 
@@ -24,6 +26,7 @@ private:
     sf::Text text;
     sf::RectangleShape button;
     sf::Text buttonText;
+    std::optional<sf::Vector2f> customPosition_;
 
     void updateLayout(sf::Vector2u winSize);
 };
