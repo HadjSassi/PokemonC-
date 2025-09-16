@@ -55,6 +55,8 @@ FightPage::FightPage(PokemonParty &partie) : CenteredActionPage(), party(partie)
 void FightPage::onButtonClicked() {
     CenteredActionPage::onButtonClicked();
     auto selected = selectBox_.getSelectedIds();
+    PokemonAttack pokemon_attack(party);
+    pokemon_attack.createSetFromParty(selected);
 }
 
 unique_ptr<BasePage> FightPage::next() {

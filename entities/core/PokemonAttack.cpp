@@ -2,6 +2,10 @@
 
 #include <stdexcept>
 
+PokemonAttack::PokemonAttack(PokemonParty &partie) : PokemonVector(), party(partie) {
+    attack_team.clear();
+}
+
 void PokemonAttack::createSetFromParty(int number_of_pokemons, int random_seed) {
     if (number_of_pokemons < 1 || number_of_pokemons > MAX_POKEMON_PER_PARTY) {
         throw invalid_argument("Number of pokemons must be between 1 and " + to_string(MAX_POKEMON_PER_PARTY));
@@ -15,14 +19,14 @@ void PokemonAttack::createSetFromParty(int number_of_pokemons, int random_seed) 
     vector<int> selected_indices;
     while (attack_team.size() < number_of_pokemons) {
         int index = rand() % getPokemonsCount();
-        attack_team.push_back(extractPokemonFromPartyByIndex(index));
+        attack_team.push_back(party.extractPokemonFromPartyByIndex(index));
     }
 }
 
 void PokemonAttack::reintegrateAllToParty() {
     for (Pokemon &pokemon: attack_team) {
         pokemon.heal(pokemon.getMaxLife());
-        addPokemonToParty(pokemon);
+        party.addPokemonToParty(pokemon);
     }
     attack_team.clear();
 }
@@ -31,12 +35,21 @@ void PokemonAttack::reintegrateDeadToParty() {
     for (Pokemon pokemon: attack_team) {
         if (pokemon.getHitPoint() <= 0) {
             pokemon.heal(pokemon.getMaxLife());
-            addPokemonToParty(pokemon);
+            party.addPokemonToParty(pokemon);
         }
     }
 }
 
 void PokemonAttack::createSetFromParty(const vector<int> &vector) {
     for (int index : vector)
-        attack_team.push_back(extractPokemonFromPartyByIndex(index));
+        attack_team.push_back(party.extractPokemonFromPartyByIndex(index));
+}
+
+
+void PokemonAttack::displayAllPokemons() {
+    cout << "All Pokemons in the attack team " << endl;
+    for (const Pokemon &pokemon: attack_team) {
+        pokemon.displayInfo();
+    }
+    cout << "-----------------------" << endl;
 }

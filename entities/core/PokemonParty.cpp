@@ -14,12 +14,14 @@ int PokemonParty::getPokemonsCount() const {
 }
 
 Pokemon PokemonParty::extractPokemonFromPartyByIndex(int index) {
-    if (index >= 0 && index < my_pokemons.size()) {
-        Pokemon extracted = my_pokemons.at(index);
-        my_pokemons.erase(my_pokemons.begin() + index);
-        return extracted;
+    for (size_t i = 0; i < my_pokemons.size(); ++i) {
+        if (my_pokemons[i].getId() == index) {
+            Pokemon extracted = my_pokemons.at(i);
+            my_pokemons.erase(my_pokemons.begin() + i);
+            return extracted;
+        }
     }
-    throw std::out_of_range("Index invalide");
+    throw std::invalid_argument("Id introuvable");
 }
 
 Pokemon PokemonParty::extractPokemonFromPartyByName(string name) {
