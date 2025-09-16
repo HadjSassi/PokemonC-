@@ -22,7 +22,7 @@ void FightingPage::onButtonClicked() {
 }
 
 void FightingPage::makeWar() {
-    cout << "yaaaaaaaa" << endl;
+    popup_.show("AAAAnd the Result IIIIS:");
 }
 
 
