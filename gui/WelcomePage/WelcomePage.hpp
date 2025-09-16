@@ -2,7 +2,7 @@
 #define WELCOMEPAGE_HPP
 #include "../BasePage.hpp"
 #include <SFML/Graphics.hpp>
-#include "../VideoPlayer/VideoPlayer.hpp"
+#include "../components/VideoPlayer/VideoPlayer.hpp"
 #include "../../entities/headers/PokemonParty.hpp"
 
 class WelcomePage : public BasePage {

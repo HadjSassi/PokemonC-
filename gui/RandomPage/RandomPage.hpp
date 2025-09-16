@@ -2,7 +2,7 @@
 #define RANDOMPAGE_HPP
 
 #include "../BasePage.hpp"
-#include "../VideoPlayer/VideoPlayer.hpp"
+#include "../components/VideoPlayer/VideoPlayer.hpp"
 #include "../../entities/headers/PokemonParty.hpp"
 #include <random>
 

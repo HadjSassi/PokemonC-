@@ -28,8 +28,8 @@ add_executable(pokemon main.cpp
         gui/FightPage/FightPage.hpp
         gui/common/CenteredActionPage.cpp
         gui/common/CenteredActionPage.hpp
-        gui/VideoPlayer/VideoPlayer.cpp
-        gui/VideoPlayer/VideoPlayer.hpp
+        gui/components/VideoPlayer/VideoPlayer.cpp
+        gui/components/VideoPlayer/VideoPlayer.hpp
         gui/components/popup/Popup.cpp
         gui/components/popup/Popup.hpp
         gui/components/selectbox/SelectBox.cpp
