@@ -56,3 +56,12 @@ void PokemonAttack::displayAllPokemons() {
 vector<Pokemon> &PokemonAttack::getMyPokemons() {
     return attack_team;
 }
+
+void PokemonAttack::removePokemon(const Pokemon &pokemon) {
+    for (auto it = attack_team.begin(); it != attack_team.end(); ++it) {
+        if (it->getId() == pokemon.getId()) {
+            attack_team.erase(it);
+            break;
+        }
+    }
+}
