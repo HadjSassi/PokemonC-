@@ -57,11 +57,11 @@ void FightPage::onButtonClicked() {
 
 unique_ptr<BasePage> FightPage::next() {
     auto selected = selectBox_.getSelectedIds();
+    PokemonParty::getInstance().attack->getMyPokemons().clear();
     PokemonParty::getInstance().attack->createSetFromParty(selected);
     if (selected.empty())
         return make_unique<class HomePage>();
-    else
-        return make_unique<class FightingPage>(randomPokemons_);
+    return make_unique<class FightingPage>(randomPokemons_);
 }
 
 

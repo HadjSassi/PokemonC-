@@ -7,7 +7,6 @@ PokemonParty& PokemonParty::getInstance() {
 
 PokemonParty::PokemonParty() : PokemonVector() {
     attack = new PokemonAttack();
-    attack->displayAllPokemons();
     my_pokemons.clear();
 }
 

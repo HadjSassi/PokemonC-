@@ -22,7 +22,32 @@ void FightingPage::onButtonClicked() {
 }
 
 void FightingPage::makeWar() {
-    popup_.show("AAAAnd the Result IIIIS:");
+    //todo till now it's version 1!
+    int win = 0;
+    int lose = 0;
+    vector<Pokemon> my_pokemons = PokemonParty::getInstance().attack->getMyPokemons();
+    for (int i = 0; i < randomPokemons_.size(); i++) {
+        Pokemon my_pokemon = my_pokemons[i];
+        Pokemon enemy_pokemon = randomPokemons_[i];
+        bool striking = true;
+        while (my_pokemon.getHitPoint() > 0 && enemy_pokemon.getHitPoint() > 0) {
+            if (striking) {
+                my_pokemon.strike(enemy_pokemon);
+                striking = false;
+            } else {
+                enemy_pokemon.strike(my_pokemon);
+                striking = true;
+            }
+        }
+        if (my_pokemon.getHitPoint() > 0) {
+            win++;
+            PokemonParty::getInstance().addPokemonToParty(enemy_pokemon);
+        } else if (enemy_pokemon.getHitPoint() > 0) {
+            lose++;
+        }
+    }
+    popup_.show("You won " + to_string(win) + " and lost " + to_string(lose) + " pokemons.");
+    PokemonParty::getInstance().attack->reintegrateAllToParty();
 }
 
 

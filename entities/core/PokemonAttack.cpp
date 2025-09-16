@@ -28,7 +28,6 @@ void PokemonAttack::reintegrateAllToParty() {
         pokemon.heal(pokemon.getMaxLife());
         PokemonParty::getInstance().addPokemonToParty(pokemon);
     }
-    attack_team.clear();
 }
 
 void PokemonAttack::reintegrateDeadToParty() {
@@ -41,7 +40,7 @@ void PokemonAttack::reintegrateDeadToParty() {
 }
 
 void PokemonAttack::createSetFromParty(const vector<int> &vector) {
-    for (int index : vector)
+    for (int index: vector)
         attack_team.push_back(PokemonParty::getInstance().extractPokemonFromPartyByIndex(index));
 }
 
@@ -54,6 +53,6 @@ void PokemonAttack::displayAllPokemons() {
     cout << "-----------------------" << endl;
 }
 
-vector<Pokemon>& PokemonAttack::getMyPokemons()  {
+vector<Pokemon> &PokemonAttack::getMyPokemons() {
     return attack_team;
 }
