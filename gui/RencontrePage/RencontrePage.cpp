@@ -25,7 +25,7 @@ void RencontrePage::selectRandomPokemon() {
         // std::uniform_int_distribution<> distrib(1, 10);
         pokemonId = distrib(gen);
         pokemon = pokedex->getPokemonByIndex(pokemonId);
-        std::string path = "../resources/img/pokemons/" + std::to_string(pokemonId) + ".png";
+        std::string path = "../resources/img/pokemons/" + std::to_string(pokemon->getId()) + ".png";
         if (pokemonTexture.loadFromFile(path)) {
             pokemonSprite.setTexture(pokemonTexture);
         }
