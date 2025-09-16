@@ -1,13 +1,15 @@
 #include "gui/WelcomePage/WelcomePage.hpp"
 #include <SFML/Graphics.hpp>
 
-PokemonParty party;
-
+#include "entities/headers/PokemonAttack.hpp"
+#include "gui/FightingPage/FightingPage.hpp"
+#include "gui/HomePage/HomePage.hpp"
 int main() {
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
     sf::RenderWindow window(desktop, "Pokemon The Game", sf::Style::Default);
 
-    std::unique_ptr<BasePage> state = std::make_unique<WelcomePage>(party);
+    std::unique_ptr<BasePage> state = std::make_unique<WelcomePage>();
+    // std::unique_ptr<BasePage> state = std::make_unique<HomePage>();
 
     while (window.isOpen()) {
         sf::Event event{};

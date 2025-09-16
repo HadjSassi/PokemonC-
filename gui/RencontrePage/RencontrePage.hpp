@@ -12,20 +12,25 @@
 
 class RencontrePage : public CenteredActionPage {
 public:
-    RencontrePage(PokemonParty &partie);
+    RencontrePage();
+
     void selectRandomPokemon();
+
     unique_ptr<BasePage> next() override;
 
+    unique_ptr<BasePage> previous() override;
+
 protected:
-    void onButtonClicked() override ;
-    void handleEvent(const sf::Event& event, sf::Vector2u winSize) override;
+    void onButtonClicked() override;
+
+    void handleEvent(const sf::Event &event, sf::Vector2u winSize) override;
+
 private:
     int pokemonId{};
     sf::Texture pokemonTexture;
     sf::Sprite pokemonSprite;
     Popup popup;
     Pokemon *pokemon{};
-    PokemonParty& party ;
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 };
 

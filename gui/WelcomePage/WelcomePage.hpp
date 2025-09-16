@@ -7,7 +7,7 @@
 
 class WelcomePage : public BasePage {
 public:
-    WelcomePage(PokemonParty& partyRef);
+    WelcomePage();
 
     bool isFinished() const override;
 
@@ -15,11 +15,12 @@ public:
 
     unique_ptr<BasePage> next() override;
 
+    unique_ptr<BasePage> previous() override;
+
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
 private:
     sf::Clock clock_;
     std::unique_ptr<VideoPlayer> video_;
-    PokemonParty &party;
 };
 #endif // WELCOMEPAGE_HPP

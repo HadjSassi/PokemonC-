@@ -1,7 +1,7 @@
 #include "HomePage.hpp"
 #include "../RandomPage/RandomPage.hpp"
 
-HomePage::HomePage(PokemonParty& partyRef) : CenteredActionPage(), party(partyRef) {
+HomePage::HomePage() : CenteredActionPage() {
     text_.setString("Page principale");
     text_.setCharacterSize(48);
     text_.setFillColor(sf::Color::Green);
@@ -13,15 +13,11 @@ HomePage::HomePage(PokemonParty& partyRef) : CenteredActionPage(), party(partyRe
 }
 
 unique_ptr<BasePage> HomePage::next() {
-    return make_unique<class RandomPage>(party);
+    return make_unique<class RandomPage>();
+}
+
+unique_ptr<BasePage> HomePage::previous() {
+    return CenteredActionPage::previous();
 }
 
 void HomePage::update() {}
-
-void HomePage::setParty(PokemonParty &partie) {
-    party = partie;
-}
-
-PokemonParty& HomePage::getParty() {
-    return party;
-}

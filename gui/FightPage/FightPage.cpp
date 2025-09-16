@@ -1,11 +1,11 @@
 #include "FightPage.hpp"
 #include "../HomePage/HomePage.hpp"
 #include <random>
-
 #include "../../entities/headers/Pokedex.hpp"
 #include "../../entities/headers/PokemonAttack.hpp"
+#include "../FightingPage/FightingPage.hpp"
 
-FightPage::FightPage(PokemonParty &partie) : CenteredActionPage(), party(partie),
+FightPage::FightPage() : CenteredActionPage(),
                                                    selectBox_(font_, {50.f, 100.f}, {200.f, 400.f}) {
 
     text_.setString("Fight");
@@ -24,9 +24,9 @@ FightPage::FightPage(PokemonParty &partie) : CenteredActionPage(), party(partie)
     valueTexts_.resize(6);
     pokeTextures_.resize(6);
     pokeSprites_.resize(6);
-    int maxPokemons = party.getPokemonsCount() > 6
+    int maxPokemons = PokemonParty::getInstance().getPokemonsCount() > 6
                           ? 6
-                          : party.getPokemonsCount();
+                          : PokemonParty::getInstance().getPokemonsCount();
     for (int i = 0; i < maxPokemons; ++i) {
         auto ptr = Pokedex::getInstance()->getPokemonByIndex(dis(gen));
         if (ptr) {
@@ -44,7 +44,7 @@ FightPage::FightPage(PokemonParty &partie) : CenteredActionPage(), party(partie)
         }
     }
     std::vector<std::pair<int, std::string> > items;
-    for (const Pokemon &pokemonn: party.getPokemons()) {
+    for (const Pokemon &pokemonn: PokemonParty::getInstance().getPokemons()) {
         std::ostringstream oss;
         oss << pokemonn.getName() << " (ATT " << pokemonn.getAttack() << ", DEF " << pokemonn.getDefense() << ")";
         items.emplace_back(pokemonn.getId(), oss.str());
@@ -54,13 +54,17 @@ FightPage::FightPage(PokemonParty &partie) : CenteredActionPage(), party(partie)
 
 void FightPage::onButtonClicked() {
     CenteredActionPage::onButtonClicked();
-    auto selected = selectBox_.getSelectedIds();
-    PokemonAttack pokemon_attack(party);
-    pokemon_attack.createSetFromParty(selected);
 }
 
 unique_ptr<BasePage> FightPage::next() {
-    return make_unique<class HomePage>(party);
+    auto selected = selectBox_.getSelectedIds();
+    PokemonParty::getInstance().attack->createSetFromParty(selected);
+    return make_unique<class FightingPage>(randomPokemons_);
+}
+
+
+unique_ptr<BasePage> FightPage::previous() {
+    return make_unique<class HomePage>();
 }
 
 void FightPage::handleEvent(const sf::Event &event, sf::Vector2u window) {

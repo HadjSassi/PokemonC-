@@ -6,17 +6,19 @@
 
 class HomePage : public CenteredActionPage {
 public:
-    HomePage(PokemonParty& partie);
+    HomePage();
 
     unique_ptr<BasePage> next() override;
 
+    unique_ptr<BasePage> previous() override;
+
     void update() override;
 
-    void setParty(PokemonParty& party);
+    void setParty(PokemonParty &party);
 
-    PokemonParty& getParty();
+    PokemonParty &getParty();
+
 protected:
     void onButtonClicked() override { CenteredActionPage::onButtonClicked(); }
-    PokemonParty& party ;
 };
 #endif // HOMEPAGE_HPP

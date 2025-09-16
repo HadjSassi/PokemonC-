@@ -14,7 +14,8 @@ public:
     virtual void update() = 0;
     virtual bool isFinished() const { return false; }
     virtual unique_ptr<BasePage> next() { return nullptr; }
-
+    virtual unique_ptr<BasePage> previous() { return nullptr; }
+    virtual ~BasePage() = default;
 protected:
     sf::Text text_;
     sf::Font font_;

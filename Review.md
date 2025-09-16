@@ -30,8 +30,6 @@ Pas de test dans le main, impossible de constater ce qui fonctionne ou ne foncti
 ta fonction addPokemonToParty fait exactement la même chose que la fonction addPokemon de PokemonVector dont la classe hérite
 *Oui, bien vu, this shouls be todo*
 
-[//]: # (todo)
-
 ## PokemonAttack
 Un peu comme dit dans ton Readme
 PokemonAttack hérite des fonctions de PokemonParty donc tous les attack_team.push_back peuvent à la place utiliser le vecteur my_pokemons et les fonctions addPokemonToParty et extractPokemonFromParty

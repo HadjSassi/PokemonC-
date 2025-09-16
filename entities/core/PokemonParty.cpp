@@ -1,7 +1,13 @@
 #include "../headers/PokemonParty.hpp"
 
-PokemonParty::PokemonParty(): PokemonVector() {
-    my_pokemons = vector<Pokemon>();
+PokemonParty& PokemonParty::getInstance() {
+    static PokemonParty instance;
+    return instance;
+}
+
+PokemonParty::PokemonParty() : PokemonVector() {
+    attack = new PokemonAttack();
+    attack->displayAllPokemons();
     my_pokemons.clear();
 }
 

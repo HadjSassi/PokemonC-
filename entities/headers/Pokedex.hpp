@@ -1,3 +1,5 @@
+#ifndef POKEDEX_HPP
+#define POKEDEX_HPP
 #include "PokemonVector.hpp"
 #include <fstream>
 #include <sstream>
@@ -16,3 +18,4 @@ private:
 
     Pokedex();
 };
+#endif // POKEDEX_HPP

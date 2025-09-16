@@ -1,7 +1,7 @@
 #include "VideoPlayer.hpp"
 #include <filesystem>
 #include <iostream>
-
+//todo to place the folder VideoPlayer in the components
 namespace fs = filesystem;
 
 VideoPlayer::VideoPlayer(const string &path, float fps) {
