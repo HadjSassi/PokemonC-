@@ -7,7 +7,8 @@ SelectBox::SelectBox(const sf::Font &font, sf::Vector2f position, sf::Vector2f s
     : font_(font),
       scrollOffset_(0),
       headerHeight_(36.f),
-      itemHeight_(24.f)
+      itemHeight_(24.f),
+      nextOrder_(1)
 {
     box_.setPosition(position);
     box_.setSize(size);
@@ -87,9 +88,16 @@ void SelectBox::handleEvent(const sf::Event &event, sf::Vector2u /*windowSize*/)
                     }
                     if (selectedCount < 6) {
                         items_[idx].checked = true;
+                        items_[idx].selectedOrder = nextOrder_++;
                     }
                 } else {
                     items_[idx].checked = false;
+                    items_[idx].selectedOrder = 0;
+                    int order = 1;
+                    for (auto& item : items_) {
+                        if (item.checked) item.selectedOrder = order++;
+                    }
+                    nextOrder_ = order;
                 }
                 break;
             }
@@ -109,28 +117,28 @@ void SelectBox::updateFilter() {
 }
 
 std::vector<int> SelectBox::getSelectedIds() const {
-    std::vector<int> res;
+    std::vector<std::pair<int, int>> ordered;
     for (const auto& item : items_)
-        if (item.checked) res.push_back(item.id);
+        if (item.checked) ordered.emplace_back(item.selectedOrder, item.id);
+    std::sort(ordered.begin(), ordered.end());
+    std::vector<int> res;
+    for (const auto& p : ordered) res.push_back(p.second);
     return res;
 }
 
 void SelectBox::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(box_, states);
 
-    // Draw and scale search bar text to fit header width
     sf::Text searchBar = searchText_;
     searchBar.setString("Recherche: " + searchInput_);
     float searchLeft = box_.getPosition().x + 8.f;
     float searchRight = box_.getPosition().x + box_.getSize().x - 8.f;
     float searchAvail = std::max(16.f, searchRight - (searchLeft + 8.f));
-    // reset scale to 1 before measuring
     searchBar.setScale(1.f, 1.f);
     float sbWidth = searchBar.getLocalBounds().width;
     float sbScale = 1.f;
     if (sbWidth > 0.f) sbScale = std::min(1.f, (searchAvail - 4.f) / sbWidth);
     searchBar.setScale(sbScale, sbScale);
-    // vertical centering in header
     sf::FloatRect sbBounds = searchBar.getGlobalBounds();
     searchBar.setPosition(searchLeft, box_.getPosition().y + (headerHeight_ - sbBounds.height) / 2.f - searchBar.getLocalBounds().top * sbScale);
     target.draw(searchBar, states);
@@ -145,7 +153,6 @@ void SelectBox::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 
     float y = top - innerOffset;
 
-    // compute horizontal positions and available width for labels
     float checkboxX = box_.getPosition().x + 8.f;
     float labelX = box_.getPosition().x + 36.f;
     float labelRight = box_.getPosition().x + box_.getSize().x - 8.f;
@@ -166,18 +173,24 @@ void SelectBox::draw(sf::RenderTarget &target, sf::RenderStates states) const {
         label.setFillColor(sf::Color::White);
         label.setString(items_[idx].label);
 
-        // ensure scale is reset
         label.setScale(1.f, 1.f);
         float lblWidth = label.getLocalBounds().width;
         float scale = 1.f;
         if (lblWidth > 0.f) scale = std::min(1.f, (labelAvail - 4.f) / lblWidth);
         label.setScale(scale, scale);
 
-        // position label with proper vertical centering using global bounds after scale
         sf::FloatRect gb = label.getGlobalBounds();
         float labelY = y + (itemHeight_ - gb.height) / 2.f - label.getLocalBounds().top * scale;
         label.setPosition(labelX, labelY);
-
+        if (items_[idx].checked) {
+            sf::Text orderText;
+            orderText.setFont(font_);
+            orderText.setCharacterSize(16);
+            orderText.setFillColor(sf::Color::Yellow);
+            orderText.setString(std::to_string(items_[idx].selectedOrder));
+            orderText.setPosition(checkboxX + 22.f, y + (itemHeight_ - 20.f) / 2.f);
+            target.draw(orderText, states);
+        }
         target.draw(label, states);
     }
 }

@@ -45,7 +45,7 @@ FightPage::FightPage() : CenteredActionPage(),
     std::vector<std::pair<int, std::string> > items;
     for (const Pokemon &pokemonn: PokemonParty::getInstance().getPokemons()) {
         std::ostringstream oss;
-        oss << pokemonn.getName() << " (ATT " << pokemonn.getAttack() << ", DEF " << pokemonn.getDefense() << ")";
+        oss << pokemonn.getName();
         items.emplace_back(pokemonn.getId(), oss.str());
     }
     selectBox_.setItems(items);

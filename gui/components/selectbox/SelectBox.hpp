@@ -10,6 +10,7 @@ struct Item {
     int id;
     std::string label;
     bool checked;
+    int selectedOrder = 0;
 };
 
 class SelectBox : public sf::Drawable {
@@ -39,7 +40,7 @@ private:
     sf::Font font_;
     float scrollOffset_;
     int visibleCount_;
-
+    int nextOrder_ = 1;
     // config
     float headerHeight_;
     float itemHeight_;
