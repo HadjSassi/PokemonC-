@@ -123,6 +123,7 @@ const string VERSUS_IMAGE_PATH = "../resources/img/versusSmall.png";
 const string IMAGES_PATH = "../resources/img/pokemons/";
 const string EXPLORATION_VID_PATH = "../resources/vid/exploration";
 const string OPENING_VID_PATH = "../resources/vid/throw";
+const string ENDING_VID_PATH = "../resources/vid/fadingOut";
 const string FONT_PATH = "../resources/font/arial.ttf";
 const string WALLPAPER_PATH = "../resources/img/wallpaper.png";
 const string MUSIC_PATH = "../resources/music/son.mp3";

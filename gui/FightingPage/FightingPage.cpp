@@ -4,6 +4,7 @@
 #include <sstream>
 
 #include "../HomePage/HomePage.hpp"
+#include "../EndingPage/EndingPage.hpp"
 
 class PokemonAttack;
 
@@ -62,6 +63,8 @@ void FightingPage::handleEvent(const sf::Event &event, sf::Vector2u winSize) {
 }
 
 unique_ptr<BasePage> FightingPage::next() {
+    if (PokemonParty::getInstance().getPokemonsCount() == FIRST_VALUE)
+        return make_unique<class EndingPage>();
     return make_unique<class HomePage>();
 }
 
