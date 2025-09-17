@@ -1,15 +1,16 @@
 #include "gui/WelcomePage/WelcomePage.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include "config.hpp"
 #include "entities/headers/PokemonAttack.hpp"
 #include "gui/FightingPage/FightingPage.hpp"
 #include "gui/HomePage/HomePage.hpp"
 int main() {
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
-    sf::RenderWindow window(desktop, "Pokemon The Game", sf::Style::Default);
+    sf::RenderWindow window(desktop, WINDOW_TITLE, sf::Style::Default);
     sf::Music music;
-    if (!music.openFromFile("../resources/music/son.mp3")) {
-        return -1;
+    if (!music.openFromFile(MUSIC_PATH)) {
+        return NOT_FOUND;
     }
     music.setLoop(true);
     music.play();

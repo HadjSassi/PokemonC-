@@ -9,6 +9,7 @@ using namespace std;
 const int FIRST_FIELD_INDEX = 0;
 const int FIRST_VALUE = 0;
 const int SECOND_VALUE = 1;
+const int NOT_FOUND = -1;
 const int LIFE_HEALTH_VALUE = 0;
 const int MAX_POKEMON_PER_PARTY = 6;
 const int DEFAULT_RANDOM_SEED = 42;
@@ -124,5 +125,5 @@ const string EXPLORATION_VID_PATH = "../resources/vid/exploration";
 const string OPENING_VID_PATH = "../resources/vid/throw";
 const string FONT_PATH = "../resources/font/arial.ttf";
 const string WALLPAPER_PATH = "../resources/img/wallpaper.png";
-
+const string MUSIC_PATH = "../resources/music/son.mp3";
 #endif //POKEMON_CONFIG_HPP
