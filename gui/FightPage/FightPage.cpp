@@ -37,7 +37,7 @@ FightPage::FightPage() : CenteredActionPage(),
             valueTexts_[i].setFillColor(sf::Color::White);
 
             std::ostringstream oss;
-            oss << IMAGES_PATH << ptr->getId() << "PNG";
+            oss << IMAGES_PATH << ptr->getId() << PNG;
             pokeTextures_[i].loadFromFile(oss.str());
             pokeSprites_[i].setTexture(pokeTextures_[i]);
             pokeSprites_[i].setScale(SPRITE_SCALE_FACTOR / pokeTextures_[i].getSize().x, SPRITE_SCALE_FACTOR / pokeTextures_[i].getSize().y);
