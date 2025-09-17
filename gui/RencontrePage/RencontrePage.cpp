@@ -7,13 +7,13 @@
 RencontrePage::RencontrePage() : CenteredActionPage(), popup(*text_.getFont()) {
     selectRandomPokemon();
 
-    text_.setString("Rencontre");
-    text_.setCharacterSize(48);
+    text_.setString(RENCONTRE_TEXT);
+    text_.setCharacterSize(BIG_CHARACTER_SIZE);
     text_.setFillColor(sf::Color::Yellow);
 
-    setButtonSize({220.f, 64.f});
+    setButtonSize({BUTTON_X_SIZE, BUTTON_Y_SIZE});
     setButtonColors(sf::Color(30, 144, 255), sf::Color::Black, 2.f);
-    setButtonText("Capture", 32, sf::Color::White);
+    setButtonText(CAPTURE_BUTTON_TEXT, CHARACTER_SIZE, sf::Color::White);
 }
 
 void RencontrePage::selectRandomPokemon() {
@@ -21,11 +21,11 @@ void RencontrePage::selectRandomPokemon() {
         Pokedex *pokedex = Pokedex::getInstance();
         std::random_device rd;
         std::mt19937 gen(rd());
-        std::uniform_int_distribution<> distrib(1, 799);
+        std::uniform_int_distribution<> distrib(FIRST_POKEMON_ID, LAST_POKEMON_ID);
         // std::uniform_int_distribution<> distrib(1, 10);
         pokemonId = distrib(gen);
         pokemon = pokedex->getPokemonByIndex(pokemonId);
-        std::string path = "../resources/img/pokemons/" + std::to_string(pokemon->getId()) + ".png";
+        std::string path = IMAGES_PATH + std::to_string(pokemon->getId()) + PNG;
         if (pokemonTexture.loadFromFile(path)) {
             pokemonSprite.setTexture(pokemonTexture);
         }
@@ -47,17 +47,17 @@ void RencontrePage::draw(sf::RenderTarget &target, sf::RenderStates states) cons
 
     sf::Sprite scaledSprite = pokemonSprite;
     scaledSprite.setScale(-scale, scale);
-    scaledSprite.setPosition(static_cast<float>(texSize.x * scale), 0);
+    scaledSprite.setPosition(static_cast<float>(texSize.x * scale), FIRST_VALUE);
 
     sf::Text infoText;
     infoText.setFont(*text_.getFont());
     if (pokemon) infoText.setString(pokemon->getInfoString());
-    infoText.setCharacterSize(28);
+    infoText.setCharacterSize(LITTLE_CHARACTER_SIZE);
     infoText.setFillColor(sf::Color::White);
 
     sf::FloatRect textRect = infoText.getLocalBounds();
-    float x = winSize.x - textRect.width - 60.f;
-    float y = (winSize.y - textRect.height) / 2.f;
+    float x = winSize.x - textRect.width - IMAGE_SIZE;
+    float y = (winSize.y - textRect.height) / LINE_THICKNESS;
     infoText.setPosition(x, y);
 
     CenteredActionPage::draw(target, states);
@@ -68,11 +68,11 @@ void RencontrePage::draw(sf::RenderTarget &target, sf::RenderStates states) cons
 
 void RencontrePage::onButtonClicked() {
     int result = std::rand() % 2;
-    if (result == 0)
-        popup.show("Pokemon flew unfortunately");
+    if (result == FIRST_VALUE)
+        popup.show(ESCAPED_POKEMONS);
     else {
         PokemonParty::getInstance().addPokemonToParty(*pokemon);
-        popup.show("Congratulation Pokemon well captured");
+        popup.show(CAPTURED_POKEMONS);
     }
 }
 

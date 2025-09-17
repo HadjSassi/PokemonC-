@@ -14,7 +14,7 @@ SelectBox::SelectBox(const sf::Font &font, sf::Vector2f position, sf::Vector2f s
     box_.setSize(size);
     box_.setFillColor(sf::Color(40, 40, 40));
     box_.setOutlineColor(sf::Color::White);
-    box_.setOutlineThickness(BUTTON_LINE_THICKNESS);
+    box_.setOutlineThickness(LINE_THICKNESS);
 
     searchText_.setFont(font_);
     searchText_.setCharacterSize(BUTTON_PADDING);
@@ -78,7 +78,7 @@ void SelectBox::handleEvent(const sf::Event &event, sf::Vector2u) {
 
         float y = top - innerOffset;
         for (int vi = FIRST_VALUE; vi < visibleCount_ && (firstVisible + vi) < static_cast<int>(filteredIndices_.size()); ++vi, y += itemHeight_) {
-            sf::FloatRect rect(box_.getPosition().x + SEARCH_TEXT_X_MARGIN, y + (itemHeight_ - BUTTON_PADDING) / BUTTON_LINE_THICKNESS, BUTTON_PADDING, BUTTON_PADDING);
+            sf::FloatRect rect(box_.getPosition().x + SEARCH_TEXT_X_MARGIN, y + (itemHeight_ - BUTTON_PADDING) / LINE_THICKNESS, BUTTON_PADDING, BUTTON_PADDING);
             if (rect.contains(mouse)) {
                 int idx = filteredIndices_[firstVisible + vi];
                 if (!items_[idx].checked) {
@@ -137,10 +137,10 @@ void SelectBox::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     searchBar.setScale(SEARCH_BAR_SCALE, SEARCH_BAR_SCALE);
     float sbWidth = searchBar.getLocalBounds().width;
     float sbScale = SEARCH_BAR_SCALE;
-    if (sbWidth > SCROLL_OFFSET) sbScale = std::min(SEARCH_BAR_SCALE, (searchAvail - 2*BUTTON_LINE_THICKNESS) / sbWidth);
+    if (sbWidth > SCROLL_OFFSET) sbScale = std::min(SEARCH_BAR_SCALE, (searchAvail - 2*LINE_THICKNESS) / sbWidth);
     searchBar.setScale(sbScale, sbScale);
     sf::FloatRect sbBounds = searchBar.getGlobalBounds();
-    searchBar.setPosition(searchLeft, box_.getPosition().y + (headerHeight_ - sbBounds.height) / BUTTON_LINE_THICKNESS - searchBar.getLocalBounds().top * sbScale);
+    searchBar.setPosition(searchLeft, box_.getPosition().y + (headerHeight_ - sbBounds.height) / LINE_THICKNESS - searchBar.getLocalBounds().top * sbScale);
     target.draw(searchBar, states);
 
     float top = box_.getPosition().y + headerHeight_;
@@ -163,7 +163,7 @@ void SelectBox::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 
         int idx = filteredIndices_[firstVisible + vi];
         sf::RectangleShape checkbox({BUTTON_PADDING, BUTTON_PADDING});
-        checkbox.setPosition(checkboxX, y + (itemHeight_ - BUTTON_PADDING) / BUTTON_LINE_THICKNESS);
+        checkbox.setPosition(checkboxX, y + (itemHeight_ - BUTTON_PADDING) / LINE_THICKNESS);
         checkbox.setFillColor(items_[idx].checked ? sf::Color::Green : sf::Color::White);
         target.draw(checkbox, states);
 
@@ -180,7 +180,7 @@ void SelectBox::draw(sf::RenderTarget &target, sf::RenderStates states) const {
         label.setScale(scale, scale);
 
         sf::FloatRect gb = label.getGlobalBounds();
-        float labelY = y + (itemHeight_ - gb.height) / BUTTON_LINE_THICKNESS - label.getLocalBounds().top * scale;
+        float labelY = y + (itemHeight_ - gb.height) / LINE_THICKNESS - label.getLocalBounds().top * scale;
         label.setPosition(labelX, labelY);
         if (items_[idx].checked) {
             sf::Text orderText;
@@ -188,7 +188,7 @@ void SelectBox::draw(sf::RenderTarget &target, sf::RenderStates states) const {
             orderText.setCharacterSize(LABEL_CHARACTER_SIZE);
             orderText.setFillColor(sf::Color::Yellow);
             orderText.setString(std::to_string(items_[idx].selectedOrder));
-            orderText.setPosition(checkboxX + BUTTON_PADDING+2, y + (itemHeight_ - BUTTON_PADDING) / BUTTON_LINE_THICKNESS);
+            orderText.setPosition(checkboxX + BUTTON_PADDING+2, y + (itemHeight_ - BUTTON_PADDING) / LINE_THICKNESS);
             target.draw(orderText, states);
         }
         target.draw(label, states);

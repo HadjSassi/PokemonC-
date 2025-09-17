@@ -2,10 +2,10 @@
 #include "../HomePage/HomePage.hpp"
 
 WelcomePage::WelcomePage() : BasePage() {
-    text_.setString("POKEMON the Game!");
+    text_.setString(WINDOW_TITLE);
     text_.setCharacterSize(48);
     text_.setFillColor(sf::Color::White);
-    video_ = std::make_unique<VideoPlayer>("../resources/vid/throw", 15.0f);
+    video_ = std::make_unique<VideoPlayer>(OPENING_VID_PATH, FPS/2);
     isWallpaper = false;
 }
 

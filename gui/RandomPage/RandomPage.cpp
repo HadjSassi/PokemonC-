@@ -3,18 +3,19 @@
 #include "../../entities/headers/PokemonParty.hpp"
 #include "../RencontrePage/RencontrePage.hpp"
 #include "../FightPage/FightPage.hpp"
+#include "../../config.hpp"
 
 RandomPage::RandomPage() : BasePage() {
     random_device rd;
     mt19937 gen(rd());
-    uniform_int_distribution<int> dist(0, 1);
+    uniform_int_distribution<int> dist(FIRST_VALUE, SECOND_VALUE);
     value_ = dist(gen);
 
-    text_.setString("Exploration ...");
-    text_.setCharacterSize(58);
+    text_.setString(EXPLORATION_TEXT);
+    text_.setCharacterSize(BIG_CHARACTER_SIZE);
     text_.setFillColor(sf::Color::Black);
 
-    video_ = std::make_unique<VideoPlayer>("../resources/vid/exploration", 15.0f);
+    video_ = std::make_unique<VideoPlayer>(EXPLORATION_VID_PATH, FPS/2);
     isWallpaper = false;
 }
 
@@ -24,7 +25,7 @@ bool RandomPage::isFinished() const {
 }
 
 unique_ptr<BasePage> RandomPage::next() {
-    if ( PokemonParty::getInstance().getPokemonsCount() == 0 || value_ % 2 == 0) {
+    if ( PokemonParty::getInstance().getPokemonsCount() == FIRST_VALUE || value_ % 2 == FIRST_VALUE) {
     // if ( PokemonParty::getInstance().getPokemonsCount() == 0) {
         return make_unique<class RencontrePage>();
     } else {

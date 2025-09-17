@@ -1,9 +1,10 @@
 #include "BasePage.hpp"
+#include "../config.hpp"
 
 BasePage::BasePage() {
-    font_.loadFromFile("../resources/font/arial.ttf");
+    font_.loadFromFile(FONT_PATH);
     text_.setFont(font_);
-    wallpaperTexture_.loadFromFile("../resources/img/wallpaper.png");
+    wallpaperTexture_.loadFromFile(WALLPAPER_PATH);
     wallpaperSprite_.setTexture(wallpaperTexture_);
     isWallpaper = true;
 }
@@ -13,8 +14,8 @@ void BasePage::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     sf::Text centered = text_;
 
     const auto bounds = centered.getLocalBounds();
-    centered.setOrigin(bounds.left + bounds.width / 2.f,
-                       bounds.top + bounds.height / 2.f);
+    centered.setOrigin(bounds.left + bounds.width / LINE_THICKNESS,
+                       bounds.top + bounds.height / LINE_THICKNESS);
 
     const sf::View &view = target.getView();
     centered.setPosition(view.getCenter());

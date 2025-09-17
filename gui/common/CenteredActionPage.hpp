@@ -15,7 +15,7 @@ public:
 
     void setButtonSize(const sf::Vector2f &size);
 
-    void setButtonColors(const sf::Color &fill, const sf::Color &outline, float outlineThickness = BUTTON_LINE_THICKNESS);
+    void setButtonColors(const sf::Color &fill, const sf::Color &outline, float outlineThickness = LINE_THICKNESS);
 
     void setButtonText(const sf::String &label, unsigned int charSize = CHARACTER_SIZE, const sf::Color &color = sf::Color::White);
 

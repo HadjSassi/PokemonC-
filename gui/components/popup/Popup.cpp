@@ -11,7 +11,7 @@ Popup::Popup(const sf::Font& font) {
 
     box.setFillColor(sf::Color(50, 50, 50, 220));
     box.setOutlineColor(sf::Color::White);
-    box.setOutlineThickness(BUTTON_LINE_THICKNESS);
+    box.setOutlineThickness(LINE_THICKNESS);
 
     button.setSize({BUTTON1_X_SIZE, BUTTON1_Y_SIZE});
     button.setFillColor(sf::Color(30, 144, 255));
@@ -35,8 +35,8 @@ bool Popup::isVisible() const {
 void Popup::updateLayout(sf::Vector2u winSize) {
     auto bounds = text.getLocalBounds();
     float marginX = BUTTON_MARGIN, marginY = BUTTON_MARGIN;
-    float popupWidth = bounds.width + BUTTON_LINE_THICKNESS * marginX;
-    float popupHeight = bounds.height + BUTTON_LINE_THICKNESS * marginY + POP_UP_MARGIN;
+    float popupWidth = bounds.width + LINE_THICKNESS * marginX;
+    float popupHeight = bounds.height + LINE_THICKNESS * marginY + POP_UP_MARGIN;
 
     float x, y;
     if (customPosition_) {
@@ -44,24 +44,24 @@ void Popup::updateLayout(sf::Vector2u winSize) {
         y = customPosition_->y;
     } else {
         x = winSize.x - popupWidth - BUTTON_MARGIN;
-        y = (winSize.y - popupHeight) / BUTTON_LINE_THICKNESS;
+        y = (winSize.y - popupHeight) / LINE_THICKNESS;
     }
     box.setSize({popupWidth, popupHeight});
     box.setPosition(x, y);
 
     text.setPosition(
-        x + (popupWidth - bounds.width) / BUTTON_LINE_THICKNESS - bounds.left,
+        x + (popupWidth - bounds.width) / LINE_THICKNESS - bounds.left,
         y + TEXT_MARGIN
     );
 
     button.setPosition(
-        x + (popupWidth - button.getSize().x) / BUTTON_LINE_THICKNESS,
+        x + (popupWidth - button.getSize().x) / LINE_THICKNESS,
         y + popupHeight - button.getSize().y - BUTTON_PADDING
     );
     auto btnBounds = buttonText.getLocalBounds();
     buttonText.setPosition(
-        button.getPosition().x + (button.getSize().x - btnBounds.width) / BUTTON_LINE_THICKNESS - btnBounds.left,
-        button.getPosition().y + (button.getSize().y - btnBounds.height) / BUTTON_LINE_THICKNESS - btnBounds.top
+        button.getPosition().x + (button.getSize().x - btnBounds.width) / LINE_THICKNESS - btnBounds.left,
+        button.getPosition().y + (button.getSize().y - btnBounds.height) / LINE_THICKNESS - btnBounds.top
     );
 }
 

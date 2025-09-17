@@ -4,42 +4,43 @@
 #include "../../entities/headers/Pokedex.hpp"
 #include "../../entities/headers/PokemonAttack.hpp"
 #include "../FightingPage/FightingPage.hpp"
+#include "../../config.hpp"
 
 FightPage::FightPage() : CenteredActionPage(),
-                         selectBox_(font_, {50.f, 100.f}, {200.f, 400.f}) {
-    text_.setString("To Fight");
-    text_.setCharacterSize(48);
+                         selectBox_(font_, {SELECT_BOX_X_POSITION, SELECT_BOX_Y_POSITION}, {SELECT_BOX_WIDTH, SELECT_BOX_HEIGHT}) {
+    text_.setString(FIGHT_BUTTON_TEXT);
+    text_.setCharacterSize(CHARACTER_SIZE);
     text_.setFillColor(sf::Color::Red);
 
-    setButtonSize({220.f, 64.f});
+    setButtonSize({BUTTON_X_SIZE, BUTTON_Y_SIZE});
     setButtonColors(sf::Color(178, 34, 34), sf::Color::Black, 2.f);
-    setButtonText("Proceed", 32, sf::Color::White);
+    setButtonText(PROCEED_BUTTON_TEXT, CHARACTER_SIZE, sf::Color::White);
 
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(1, 799);
+    std::uniform_int_distribution<> dis(FIRST_POKEMON_ID, LAST_POKEMON_ID);
 
     randomPokemons_.clear();
-    valueTexts_.resize(6);
-    pokeTextures_.resize(6);
-    pokeSprites_.resize(6);
+    valueTexts_.resize(MAX_POKEMON_IN_PARTY);
+    pokeTextures_.resize(MAX_POKEMON_IN_PARTY);
+    pokeSprites_.resize(MAX_POKEMON_IN_PARTY);
     int maxPokemons = PokemonParty::getInstance().getPokemonsCount() > 6
-                          ? 6
+                          ? MAX_POKEMON_IN_PARTY
                           : PokemonParty::getInstance().getPokemonsCount();
-    for (int i = 0; i < maxPokemons; ++i) {
+    for (int i = FIRST_VALUE; i < maxPokemons; ++i) {
         auto ptr = Pokedex::getInstance()->getPokemonByIndex(dis(gen));
         if (ptr) {
             randomPokemons_.push_back(*ptr);
             valueTexts_[i].setFont(font_);
             valueTexts_[i].setString(randomPokemons_.back().getName());
-            valueTexts_[i].setCharacterSize(32);
+            valueTexts_[i].setCharacterSize(CHARACTER_SIZE);
             valueTexts_[i].setFillColor(sf::Color::White);
 
             std::ostringstream oss;
-            oss << "../resources/img/pokemons/" << ptr->getId() << ".png";
+            oss << IMAGES_PATH << ptr->getId() << "PNG";
             pokeTextures_[i].loadFromFile(oss.str());
             pokeSprites_[i].setTexture(pokeTextures_[i]);
-            pokeSprites_[i].setScale(100.f / pokeTextures_[i].getSize().x, 100.f / pokeTextures_[i].getSize().y);
+            pokeSprites_[i].setScale(SPRITE_SCALE_FACTOR / pokeTextures_[i].getSize().x, SPRITE_SCALE_FACTOR / pokeTextures_[i].getSize().y);
         }
     }
     std::vector<std::pair<int, std::string> > items;
@@ -82,16 +83,16 @@ void FightPage::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     const sf::Vector2f center = view.getCenter();
     const sf::Vector2f size = view.getSize();
 
-    float margin = 30.f;
-    float rowHeight = 56.f;
+    float margin = TEXT_MARGIN;
+    float rowHeight = ROW_HEIGHT/2;
     float totalHeight = valueTexts_.size() * rowHeight + (valueTexts_.size() - 1) * margin;
-    float startY = center.y - totalHeight / 2.f + 20.f;
+    float startY = center.y - totalHeight / LINE_THICKNESS + BUTTON_PADDING;
 
-    float imgSize = 100.f;
-    float col1X = center.x + size.x / 2.f - 500.f;
-    float col2X = col1X + imgSize + 24.f;
+    float imgSize = SPRITE_SCALE_FACTOR;
+    float col1X = center.x + size.x / LINE_THICKNESS - COLUMN_OFFSET;
+    float col2X = col1X + imgSize + MARGIN;
 
-    for (size_t i = 0; i < valueTexts_.size(); ++i) {
+    for (size_t i = FIRST_VALUE; i < valueTexts_.size(); ++i) {
         float y = startY + i * (rowHeight + margin);
 
         pokeSprites_[i].setPosition(col1X, y);

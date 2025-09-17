@@ -4,6 +4,7 @@
 #include "../BasePage.hpp"
 #include "../components/VideoPlayer/VideoPlayer.hpp"
 #include "../../entities/headers/PokemonParty.hpp"
+#include "../../config.hpp"
 #include <random>
 
 class RandomPage : public BasePage {
@@ -23,6 +24,6 @@ public:
 private:
     sf::Clock clock_;
     std::unique_ptr<VideoPlayer> video_;
-    int value_ = 0;
+    int value_ = FIRST_VALUE;
 };
 #endif // RANDOMPAGE_HPP

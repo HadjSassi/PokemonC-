@@ -3,7 +3,7 @@
 CenteredActionPage::CenteredActionPage() : BasePage() {
     button_.setSize({BUTTON_X_SIZE, BUTTON_Y_SIZE});
     button_.setFillColor(sf::Color(30, 144, 255));
-    button_.setOutlineThickness(BUTTON_LINE_THICKNESS);
+    button_.setOutlineThickness(LINE_THICKNESS);
     button_.setOutlineColor(sf::Color::Black);
 
     label_.setFont(font_);
@@ -41,7 +41,7 @@ void CenteredActionPage::setVerticalMargin(float margin) {
 
 void CenteredActionPage::centerLabelInButton() {
     const auto lb = label_.getLocalBounds();
-    label_.setOrigin(lb.left + lb.width / BUTTON_LINE_THICKNESS, lb.top + lb.height / BUTTON_LINE_THICKNESS);
+    label_.setOrigin(lb.left + lb.width / LINE_THICKNESS, lb.top + lb.height / LINE_THICKNESS);
 }
 
 void CenteredActionPage::handleEvent(const sf::Event &event, sf::Vector2u winSize) {
@@ -64,15 +64,15 @@ void CenteredActionPage::draw(sf::RenderTarget &target, sf::RenderStates states)
 
     sf::RectangleShape button = button_;
     const sf::Vector2f bsize = button.getSize();
-    button.setOrigin(bsize.x / BUTTON_LINE_THICKNESS, bsize.y / BUTTON_LINE_THICKNESS);
+    button.setOrigin(bsize.x / LINE_THICKNESS, bsize.y / LINE_THICKNESS);
 
     sf::Vector2f pos;
     if (buttonPosition_) {
         pos = *buttonPosition_;
     } else {
         const auto tb = text_.getLocalBounds();
-        const float textHalfH = tb.top + tb.height / BUTTON_LINE_THICKNESS;
-        pos = {center.x, center.y + textHalfH + margin_ + bsize.y / BUTTON_LINE_THICKNESS};
+        const float textHalfH = tb.top + tb.height / LINE_THICKNESS;
+        pos = {center.x, center.y + textHalfH + margin_ + bsize.y / LINE_THICKNESS};
     }
     button.setPosition(pos);
 
