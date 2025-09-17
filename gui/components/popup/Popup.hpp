@@ -4,12 +4,13 @@
 #include <optional>
 #include <SFML/Graphics.hpp>
 #include <string>
+#include "../../../config.hpp"
 
 class Popup {
 public:
     Popup(const sf::Font& font);
 
-    void show(const std::string& message, const std::string& buttonText = "OK");
+    void show(const std::string& message, const std::string& buttonText = POP_UP_BUTTON_LABEL_ACTION);
     void hide();
     bool isVisible() const;
 

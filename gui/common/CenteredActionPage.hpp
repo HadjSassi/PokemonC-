@@ -2,7 +2,7 @@
 #define CENTERED_ACTION_PAGE_HPP
 
 #include <optional>
-
+#include "../../config.hpp"
 #include "../BasePage.hpp"
 
 class CenteredActionPage : public BasePage {
@@ -15,9 +15,9 @@ public:
 
     void setButtonSize(const sf::Vector2f &size);
 
-    void setButtonColors(const sf::Color &fill, const sf::Color &outline, float outlineThickness = 2.f);
+    void setButtonColors(const sf::Color &fill, const sf::Color &outline, float outlineThickness = BUTTON_LINE_THICKNESS);
 
-    void setButtonText(const sf::String &label, unsigned int charSize = 32, const sf::Color &color = sf::Color::White);
+    void setButtonText(const sf::String &label, unsigned int charSize = CHARACTER_SIZE, const sf::Color &color = sf::Color::White);
 
     void setButtonPosition(const sf::Vector2f& pos);
 
@@ -34,7 +34,7 @@ private:
     sf::RectangleShape button_;
     sf::Text label_;
     optional<sf::Vector2f> buttonPosition_;
-    float margin_ = 24.f;
+    float margin_ = MARGIN;
 
     mutable sf::FloatRect buttonBounds_{};
     bool clicked_ = false;

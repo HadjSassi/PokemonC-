@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include "../../../config.hpp"
 #include <vector>
 #include <string>
 
@@ -10,7 +11,7 @@ using namespace std;
 
 class VideoPlayer : public sf::Drawable {
 public:
-    VideoPlayer(const string &path, float fps = 24.0f);
+    VideoPlayer(const string &path, float fps = FPS);
 
     void update();
     bool isFinished() const;
@@ -21,7 +22,7 @@ protected:
 private:
     vector<sf::Texture> frames_;
     vector<sf::Sprite> sprites_;
-    size_t currentFrame_ = 0;
+    size_t currentFrame_ = FIRST_VALUE;
     float frameDuration_;
     sf::Clock clock_;
     bool finished_ = false;

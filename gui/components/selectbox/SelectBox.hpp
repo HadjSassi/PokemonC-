@@ -3,6 +3,7 @@
 
 
 #include <SFML/Graphics.hpp>
+#include "../../../config.hpp"
 #include <vector>
 #include <string>
 
@@ -10,7 +11,7 @@ struct Item {
     int id;
     std::string label;
     bool checked;
-    int selectedOrder = 0;
+    int selectedOrder = FIRST_VALUE;
 };
 
 class SelectBox : public sf::Drawable {
@@ -40,8 +41,7 @@ private:
     sf::Font font_;
     float scrollOffset_;
     int visibleCount_;
-    int nextOrder_ = 1;
-    // config
+    int nextOrder_ = SECOND_VALUE;
     float headerHeight_;
     float itemHeight_;
 };

@@ -1,14 +1,14 @@
 #include "CenteredActionPage.hpp"
-
+#include "../../config.hpp"
 CenteredActionPage::CenteredActionPage() : BasePage() {
-    button_.setSize({220.f, 64.f});
+    button_.setSize({BUTTON_X_SIZE, BUTTON_Y_SIZE});
     button_.setFillColor(sf::Color(30, 144, 255));
-    button_.setOutlineThickness(2.f);
+    button_.setOutlineThickness(BUTTON_LINE_THICKNESS);
     button_.setOutlineColor(sf::Color::Black);
 
     label_.setFont(font_);
-    label_.setString("Action");
-    label_.setCharacterSize(32);
+    label_.setString(BUTTON_LABEL_ACTION);
+    label_.setCharacterSize(CHARACTER_SIZE);
     label_.setFillColor(sf::Color::White);
     centerLabelInButton();
 }
@@ -41,7 +41,7 @@ void CenteredActionPage::setVerticalMargin(float margin) {
 
 void CenteredActionPage::centerLabelInButton() {
     const auto lb = label_.getLocalBounds();
-    label_.setOrigin(lb.left + lb.width / 2.f, lb.top + lb.height / 2.f);
+    label_.setOrigin(lb.left + lb.width / BUTTON_LINE_THICKNESS, lb.top + lb.height / BUTTON_LINE_THICKNESS);
 }
 
 void CenteredActionPage::handleEvent(const sf::Event &event, sf::Vector2u winSize) {
@@ -64,20 +64,20 @@ void CenteredActionPage::draw(sf::RenderTarget &target, sf::RenderStates states)
 
     sf::RectangleShape button = button_;
     const sf::Vector2f bsize = button.getSize();
-    button.setOrigin(bsize.x / 2.f, bsize.y / 2.f);
+    button.setOrigin(bsize.x / BUTTON_LINE_THICKNESS, bsize.y / BUTTON_LINE_THICKNESS);
 
     sf::Vector2f pos;
     if (buttonPosition_) {
         pos = *buttonPosition_;
     } else {
         const auto tb = text_.getLocalBounds();
-        const float textHalfH = tb.top + tb.height / 2.f;
-        pos = {center.x, center.y + textHalfH + margin_ + bsize.y / 2.f};
+        const float textHalfH = tb.top + tb.height / BUTTON_LINE_THICKNESS;
+        pos = {center.x, center.y + textHalfH + margin_ + bsize.y / BUTTON_LINE_THICKNESS};
     }
     button.setPosition(pos);
 
     sf::Text label = label_;
-    label.setPosition(button.getPosition().x, button.getPosition().y - 4.f);
+    label.setPosition(button.getPosition().x, button.getPosition().y - BUTTON_LINE_MARGIN);
 
     buttonBounds_ = button.getGlobalBounds();
 

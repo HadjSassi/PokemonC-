@@ -1,15 +1,15 @@
 #include "VideoPlayer.hpp"
 #include <filesystem>
 #include <iostream>
-//todo to place the folder VideoPlayer in the components
+#include "../../../config.hpp"
 namespace fs = filesystem;
 
 VideoPlayer::VideoPlayer(const string &path, float fps) {
-    frameDuration_ = 1.0f / fps;
+    frameDuration_ = FRAME_FREQUENCY / fps;
 
     std::vector<fs::path> files;
     for (const auto &entry : fs::directory_iterator(path)) {
-        if (entry.path().extension() == ".jpg" || entry.path().extension() == ".png")
+        if (entry.path().extension() == JPG || entry.path().extension() == PNG)
             files.push_back(entry.path());
     }
     std::sort(files.begin(), files.end());
@@ -24,10 +24,9 @@ VideoPlayer::VideoPlayer(const string &path, float fps) {
     }
 
     if (sprites_.empty()) {
-        cerr << "No frames found in: " << path << endl;
+        cerr << NO_FRAME_FOUND << path << endl;
         finished_ = true;
     } else {
-        // Récupère la taille du bureau et redimensionne
         auto desktop = sf::VideoMode::getDesktopMode();
         setSize(sf::Vector2f(desktop.width, desktop.height));
     }
@@ -57,7 +56,7 @@ void VideoPlayer::draw(sf::RenderTarget &target, sf::RenderStates states) const 
 }
 
 void VideoPlayer::setSize(const sf::Vector2f& size) {
-    for (size_t i = 0; i < sprites_.size(); ++i) {
+    for (size_t i = FIRST_VALUE; i < sprites_.size(); ++i) {
         auto texSize = frames_[i].getSize();
         float scaleX = size.x / texSize.x;
         float scaleY = size.y / texSize.y;
