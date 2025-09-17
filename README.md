@@ -130,3 +130,22 @@ Plus les effets des actions, doivenet avoir des sons séparés.
 J'ai commencé de faires quelques tests unitaires surtout sur les entités. 
 Malheureusement, je n'ai pas pu faire les tests unitaires sur les pages, car SFML n'est pas mockable.
 Donc j'ai fait les tests unitaires manuellements.
+
+### 1.3.6 Makefile
+J'ai modifié le makefile pour compiler et lancer l'application correctement.
+vous allez recevoir quelques warnings, mais l'application marche correctement.
+
+Juste il faut changer le config.cpp comme ceci pour ne pas avoir des problémes genre
+```Failed to open sound file "../resources/music/son.mp3" (couldn't open stream)```
+
+le mise à jour est le suivant :
+```cpp
+const string DATABASE_PATH = "resources/database/pokedex.csv";
+const string VERSUS_IMAGE_PATH = "resources/img/versusSmall.png";
+const string IMAGES_PATH = "resources/img/pokemons/";
+const string EXPLORATION_VID_PATH = "resources/vid/exploration";
+const string OPENING_VID_PATH = "resources/vid/throw";
+const string FONT_PATH = "resources/font/arial.ttf";
+const string WALLPAPER_PATH = "resources/img/wallpaper.png";
+const string MUSIC_PATH = "resources/music/son.mp3";
+```
