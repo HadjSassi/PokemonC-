@@ -101,14 +101,16 @@ J'ai suivi le design pattern STATE.
 - Sixiéme page : On affiche chaque pokemon avec son adversaire, et un bouton pour voir la resultat de la guerre.
   - on mise à jour la pokemon party avec les pokemon gangé et perdu
 ![FightingPage.png](documentation/FightingPage.png)
+  - si la pokemon party est vide, on redirige vers la Dérniére page
+- Derniére page : Game Over Page, avec un bouton pour retourner vers la Deuxiéme page
+![Gameover.png](documentation/Gameover.png)
 ### 1.3.1 Lecteur Vidéo
 Puisque SFML ne gère pas les vidéos, on a crée une classe videoPlayer qui utilise un chemin vers un dossier qui contient des 
 frames, et les affiches en FPS, pour simuler un lecteur video.
 
 - on a mis un vidéo dans l'intro (premiére page)
 - on a mis un vidéo d'exploration (troisiéme page)
-- Il me reste à faire un vidéo si j'ai perdu tous mes pokemons.
-
+- on a mis un video de game over (derniére page)
 
 ### 1.3.2 Orienté Composant
 On a essayé le max possible de suivre les bonne pratiques, j'ai extrait des composants réutilisables, comme :
