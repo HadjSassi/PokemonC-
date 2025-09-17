@@ -1,4 +1,5 @@
 #include "../headers/Pokedex.hpp"
+#include "../../config.hpp"
 #include <cctype>
 
 Pokedex *Pokedex::instance = nullptr;
@@ -19,10 +20,10 @@ Pokedex::Pokedex() {
         stringstream ss(ligne);
         string champ;
         vector<string> champs;
-        while (getline(ss, champ, ',')) {
+        while (getline(ss, champ, COMMA)) {
             champs.push_back(champ);
         }
-        if (firstLine && !isdigit(champs[0][0])) {
+        if (firstLine && !isdigit(champs[FIRST_FIELD_INDEX][FIRST_FIELD_INDEX])) {
             firstLine = false;
             continue;
         }
@@ -35,16 +36,16 @@ Pokedex::Pokedex() {
                     stoi(champs[11]), stoi(champs[4])
                 ));
             } catch (const std::exception &e) {
-                cerr << "Erreur de parsing ligne: " << ligne << " (" << e.what() << ")" << endl;
+                cerr << PARSING_LINE_ERROR << ligne << OPENING_PARANTHESIS << e.what() << CLOSING_PARANTHESIS << endl;
             }
         }
     }
 }
 
 void Pokedex::displayAllPokemons() {
-    cout << "All Pokemons in the Pokedex:" << endl;
+    cout << POKEDEX_POKEMONS << endl;
     for (Pokemon pokemon: getPokemons()) {
         pokemon.displayInfo();
     }
-    cout << "-----------------------" << endl;
+    cout << SEPERATOR << endl;
 }

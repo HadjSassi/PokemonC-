@@ -2,6 +2,7 @@
 #define POKEMONATTACK_HPP
 #include "PokemonParty.hpp"
 #include "PokemonVector.hpp"
+#include "../../config.hpp"
 using namespace std;
 
 class PokemonAttack : public PokemonVector {
@@ -24,7 +25,7 @@ public:
     void removePokemon(const Pokemon & pokemon);
 
 private:
-    static const int MAX_POKEMON_PER_PARTY = 6;
+    static const int MAX_POKEMON_PER_PARTY = MAX_POKEMON_IN_PARTY;
     vector<Pokemon> attack_team;
 };
 #endif // POKEMONATTACK_HPP

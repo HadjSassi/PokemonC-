@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../headers/PokemonVector.hpp"
+#include "../../config.hpp"
 
 void PokemonVector::addPokemon(const Pokemon &pokemon) {
     pokemons.push_back(pokemon);
@@ -21,7 +22,7 @@ Pokemon *PokemonVector::getPokemonByIndex(int index) {
     if (index >= 0 && index < getPokemonsCount()) {
         return new Pokemon(getPokemonAt(index));
     }
-    throw out_of_range("Index out of range: " + std::to_string(index));
+    throw out_of_range(INDEX_OUT_OF_RANGE + std::to_string(index));
 }
 
 Pokemon *PokemonVector::getPokemonByName(string name) {
@@ -30,5 +31,5 @@ Pokemon *PokemonVector::getPokemonByName(string name) {
             return new Pokemon(pokemon);
         }
     }
-    throw invalid_argument("Pokemon not found: "+name);
+    throw invalid_argument(POKEMON_NOT_FOUND+name);
 }

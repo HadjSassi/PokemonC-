@@ -1,5 +1,5 @@
 #include "../headers/PokemonParty.hpp"
-
+#include "../../config.hpp"
 PokemonParty& PokemonParty::getInstance() {
     static PokemonParty instance;
     return instance;
@@ -26,7 +26,7 @@ Pokemon PokemonParty::extractPokemonFromPartyByIndex(int index) {
             return extracted;
         }
     }
-    throw std::invalid_argument("Id introuvable");
+    throw std::invalid_argument(ID_NOT_FOUND);
 }
 
 Pokemon PokemonParty::extractPokemonFromPartyByName(string name) {
@@ -37,15 +37,15 @@ Pokemon PokemonParty::extractPokemonFromPartyByName(string name) {
             return extracted;
         }
     }
-    throw std::invalid_argument("Nom introuvable");
+    throw std::invalid_argument(NAME_NOT_FOUND);
 }
 
 void PokemonParty::displayAllPokemons() {
-    cout << "All Pokemons in the party " << endl;
+    cout << PARTY_POKEMONS << endl;
     for (const Pokemon &pokemon: my_pokemons) {
         pokemon.displayInfo();
     }
-    cout << "-----------------------" << endl;
+    cout << SEPERATOR << endl;
 }
 
 bool PokemonParty::hasPokemonWithId(int index) {

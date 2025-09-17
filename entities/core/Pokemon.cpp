@@ -1,10 +1,11 @@
 #include <iostream>
 
 #include "../headers/Pokemon.hpp"
+#include "../../config.hpp"
 
 #include <sstream>
 
-int Pokemon::pokemonCount = 0;
+int Pokemon::pokemonCount = FIRST_VALUE;
 
 Pokemon::Pokemon(int id, string name, double hitPoint, double attack, double defense, int generation,
                  int maxLife) : id(id),
@@ -52,19 +53,17 @@ int Pokemon::getMaxLife() const {
 }
 
 void Pokemon::strike(Pokemon &target) const {
-    if (target.getHitPoint() > 0)
-        target.getDamage((this->attack - target.defense > 0) ? this->attack - target.defense : 0);
+    if (target.getHitPoint() > LIFE_HEALTH_VALUE)
+        target.getDamage((this->attack - target.defense > LIFE_HEALTH_VALUE) ? this->attack - target.defense : LIFE_HEALTH_VALUE);
 }
 
 bool Pokemon::getDamage(int damage) {
     this->hitPoint -= damage;
-    if (hitPoint <= 0)
-        cout << "AHHHHHHH " << name << " is DEAD/!\\" << endl;
-    return hitPoint > 0;
+    return hitPoint > LIFE_HEALTH_VALUE;
 }
 
 void Pokemon::heal(int amount) {
-    if (hitPoint <= 0)
+    if (hitPoint <= LIFE_HEALTH_VALUE)
         hitPoint = amount;
     else
         hitPoint += amount;
@@ -77,21 +76,16 @@ int Pokemon::getPokemonCount() {
 }
 
 void Pokemon::displayInfo() const {
-    cout << " ID: " << id;
-    cout << " Name: " << name;
-    cout << " Hit Points: " << hitPoint;
-    cout << " Attack: " << attack;
-    cout << " Defense: " << defense;
-    cout << " Generation: " << generation << endl;
+    cout << getInfoString() << endl;
 }
 
 std::string Pokemon::getInfoString() const {
     std::ostringstream oss;
-    oss << "ID: " << id << "\n";
-    oss << "Name: " << name << "\n";
-    oss << "Hit Points: " << hitPoint << "\n";
-    oss << "Attack: " << attack << "\n";
-    oss << "Defense: " << defense << "\n";
-    oss << "Generation: " << generation;
+    oss << ID << id << "\n";
+    oss << NAME << name << "\n";
+    oss << HIT_POINTS << hitPoint << "\n";
+    oss << ATTACK << attack << "\n";
+    oss << DEFENSE<< defense << "\n";
+    oss << GENERATION << generation;
     return oss.str();
 }

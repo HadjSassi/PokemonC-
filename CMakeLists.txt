@@ -35,7 +35,8 @@ add_executable(pokemon main.cpp
         gui/components/selectbox/SelectBox.cpp
         gui/components/selectbox/SelectBox.hpp
         gui/FightingPage/FightingPage.cpp
-        gui/FightingPage/FightingPage.hpp)
+        gui/FightingPage/FightingPage.hpp
+        config.hpp)
 
 add_executable(pokemonUnitTest cunit/PokemonUnitTest.cpp
         entities/core/Pokemon.cpp
